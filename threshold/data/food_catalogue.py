@@ -1,0 +1,125 @@
+# data/food_catalogue.py — THRESHOLD · Catalogue aliments nutrition
+# ─────────────────────────────────────────────────────────────────────────────
+# Catégories affichables dans le catalogue UI de nutrition.
+# Chaque catégorie a une couleur, une icône et une liste d'aliments de base.
+# Les valeurs nutritionnelles (kcal/prot/gluc/lip) sont pour 100g ou 100ml.
+# ─────────────────────────────────────────────────────────────────────────────
+from __future__ import annotations
+
+# ── Catégories affichables ────────────────────────────────────────────────────
+FOOD_CATEGORIES: dict[str, dict] = {
+    "Protéines animales":  {"color": "#ef4444", "icon": "🥩"},
+    "Protéines végétales": {"color": "#f97316", "icon": "🌱"},
+    "Œufs & laitiers":    {"color": "#eab308", "icon": "🥛"},
+    "Suppléments":        {"color": "#a855f7", "icon": "💊"},
+    "Glucides":           {"color": "#3b82f6", "icon": "🍚"},
+    "Fruits":             {"color": "#22c55e", "icon": "🍎"},
+    "Légumes":            {"color": "#10b981", "icon": "🥦"},
+    "Lipides":            {"color": "#f59e0b", "icon": "🥑"},
+    "Divers":             {"color": "#818aaa", "icon": "🍽"},
+}
+
+# ── Aliments de base par catégorie (kcal, prot, gluc, lip, fibres) /100g ─────
+FOOD_BASE: dict[str, list[dict]] = {
+    "Protéines animales": [
+        {"nom":"Blanc de poulet (cuit)",    "kcal":165,"prot":31.0,"gluc":0.0, "lip":3.6, "fibres":0},
+        {"nom":"Blanc de dinde (cuit)",     "kcal":135,"prot":29.0,"gluc":0.0, "lip":2.5, "fibres":0},
+        {"nom":"Boeuf haché 5% MG",         "kcal":152,"prot":26.0,"gluc":0.0, "lip":5.0, "fibres":0},
+        {"nom":"Boeuf haché 15% MG",        "kcal":215,"prot":22.0,"gluc":0.0, "lip":14.0,"fibres":0},
+        {"nom":"Boeuf haché 20% MG",        "kcal":254,"prot":20.0,"gluc":0.0, "lip":19.0,"fibres":0},
+        {"nom":"Saumon (cuit)",             "kcal":208,"prot":20.0,"gluc":0.0, "lip":13.0,"fibres":0},
+        {"nom":"Thon (en boîte, eau)",      "kcal":116,"prot":26.0,"gluc":0.0, "lip":1.0, "fibres":0},
+        {"nom":"Cabillaud (cuit)",          "kcal": 82,"prot":18.0,"gluc":0.0, "lip":0.7, "fibres":0},
+        {"nom":"Crevettes (cuites)",        "kcal": 99,"prot":21.0,"gluc":0.3, "lip":1.1, "fibres":0},
+        {"nom":"Steak (rumsteck, cuit)",    "kcal":185,"prot":29.0,"gluc":0.0, "lip":7.0, "fibres":0},
+        {"nom":"Maquereau (cuit)",          "kcal":230,"prot":19.0,"gluc":0.0, "lip":16.0,"fibres":0},
+        {"nom":"Sardines (en boîte, huile)","kcal":208,"prot":24.6,"gluc":0.0, "lip":11.5,"fibres":0},
+        {"nom":"Jambon blanc (dégraissé)",  "kcal": 97,"prot":17.0,"gluc":1.0, "lip":2.5, "fibres":0},
+    ],
+    "Protéines végétales": [
+        {"nom":"Tofu ferme",                "kcal": 76,"prot":8.1, "gluc":1.9, "lip":4.2, "fibres":0.3},
+        {"nom":"Edamame (cuit)",            "kcal":121,"prot":11.9,"gluc":8.9, "lip":5.2, "fibres":5.2},
+        {"nom":"Lentilles (cuites)",        "kcal":116,"prot":9.0, "gluc":20.1,"lip":0.4, "fibres":7.9},
+        {"nom":"Pois chiches (cuits)",      "kcal":164,"prot":8.9, "gluc":27.4,"lip":2.6, "fibres":7.6},
+        {"nom":"Haricots rouges (cuits)",   "kcal":127,"prot":8.7, "gluc":22.8,"lip":0.5, "fibres":6.4},
+        {"nom":"Haricots blancs (cuits)",   "kcal":139,"prot":9.7, "gluc":25.4,"lip":0.5, "fibres":6.3},
+    ],
+    "Œufs & laitiers": [
+        {"nom":"Oeuf entier",               "kcal":155,"prot":13.0,"gluc":1.1, "lip":11.0,"fibres":0},
+        {"nom":"Blanc d'oeuf",              "kcal": 52,"prot":11.0,"gluc":0.7, "lip":0.2, "fibres":0},
+        {"nom":"Fromage blanc 0%",          "kcal": 45,"prot":8.0, "gluc":4.0, "lip":0.1, "fibres":0},
+        {"nom":"Yaourt grec 0%",            "kcal": 59,"prot":10.0,"gluc":3.6, "lip":0.4, "fibres":0},
+        {"nom":"Yaourt grec entier (5%)",   "kcal":100,"prot":9.0, "gluc":3.6, "lip":5.0, "fibres":0},
+        {"nom":"Skyr 0%",                   "kcal": 57,"prot":10.0,"gluc":4.0, "lip":0.1, "fibres":0},
+        {"nom":"Cottage cheese",            "kcal": 98,"prot":11.1,"gluc":3.4, "lip":4.3, "fibres":0},
+        {"nom":"Lait écrémé",               "kcal": 35,"prot":3.5, "gluc":5.0, "lip":0.1, "fibres":0},
+        {"nom":"Lait entier",               "kcal": 61,"prot":3.2, "gluc":4.7, "lip":3.3, "fibres":0},
+        {"nom":"Ricotta",                   "kcal":174,"prot":7.3, "gluc":3.0, "lip":13.0,"fibres":0},
+        {"nom":"Emmental",                  "kcal":379,"prot":28.5,"gluc":0.4, "lip":29.0,"fibres":0},
+        {"nom":"Comté",                     "kcal":413,"prot":27.0,"gluc":0.0, "lip":34.0,"fibres":0},
+    ],
+    "Suppléments": [
+        {"nom":"Whey protéine",             "kcal":380,"prot":80.0,"gluc":8.0, "lip":5.0, "fibres":0},
+        {"nom":"EvoWhey HSN",               "kcal":380,"prot":76.0,"gluc":7.0, "lip":6.0, "fibres":0},
+        {"nom":"Caséine",                   "kcal":370,"prot":78.0,"gluc":9.0, "lip":3.0, "fibres":0},
+        {"nom":"Créatine monohydrate",      "kcal":  0,"prot":0.0, "gluc":0.0, "lip":0.0, "fibres":0},
+    ],
+    "Glucides": [
+        {"nom":"Riz cuit",                  "kcal":130,"prot":2.7, "gluc":28.0,"lip":0.3, "fibres":0.4},
+        {"nom":"Riz brun (cuit)",           "kcal":123,"prot":2.7, "gluc":25.6,"lip":1.0, "fibres":1.8},
+        {"nom":"Pâtes cuites",              "kcal":131,"prot":5.0, "gluc":26.0,"lip":1.1, "fibres":1.8},
+        {"nom":"Pâtes complètes (cuites)",  "kcal":124,"prot":5.3, "gluc":23.2,"lip":1.0, "fibres":3.5},
+        {"nom":"Flocons d'avoine",          "kcal":367,"prot":13.5,"gluc":58.7,"lip":7.0, "fibres":10.0},
+        {"nom":"Pain complet",              "kcal":247,"prot":9.0, "gluc":45.0,"lip":3.5, "fibres":6.5},
+        {"nom":"Pain blanc",                "kcal":265,"prot":8.0, "gluc":52.0,"lip":1.6, "fibres":2.7},
+        {"nom":"Patate douce (cuite)",      "kcal": 90,"prot":2.0, "gluc":21.0,"lip":0.1, "fibres":3.3},
+        {"nom":"Pomme de terre (cuite)",    "kcal": 87,"prot":1.9, "gluc":20.1,"lip":0.1, "fibres":1.8},
+        {"nom":"Quinoa (cuit)",             "kcal":120,"prot":4.4, "gluc":22.0,"lip":1.9, "fibres":2.8},
+        {"nom":"Boulgour (cuit)",           "kcal": 83,"prot":3.1, "gluc":18.6,"lip":0.2, "fibres":4.5},
+        {"nom":"Semoule (cuite)",           "kcal":120,"prot":3.8, "gluc":23.2,"lip":0.2, "fibres":1.4},
+        {"nom":"Galettes de riz nature",    "kcal":387,"prot":7.3, "gluc":81.5,"lip":2.8, "fibres":2.4},
+        {"nom":"Banane",                    "kcal": 89,"prot":1.1, "gluc":23.0,"lip":0.3, "fibres":2.6},
+    ],
+    "Fruits": [
+        {"nom":"Pomme",                     "kcal": 52,"prot":0.3, "gluc":14.0,"lip":0.2, "fibres":2.4},
+        {"nom":"Orange",                    "kcal": 47,"prot":0.9, "gluc":11.8,"lip":0.1, "fibres":2.4},
+        {"nom":"Kiwi",                      "kcal": 61,"prot":1.1, "gluc":14.7,"lip":0.5, "fibres":3.0},
+        {"nom":"Fraises",                   "kcal": 32,"prot":0.7, "gluc":7.7, "lip":0.3, "fibres":2.0},
+        {"nom":"Myrtilles",                 "kcal": 57,"prot":0.7, "gluc":14.5,"lip":0.3, "fibres":2.4},
+        {"nom":"Mangue",                    "kcal": 60,"prot":0.8, "gluc":15.0,"lip":0.4, "fibres":1.6},
+        {"nom":"Ananas",                    "kcal": 50,"prot":0.5, "gluc":13.1,"lip":0.1, "fibres":1.4},
+        {"nom":"Pastèque",                  "kcal": 30,"prot":0.6, "gluc":7.6, "lip":0.2, "fibres":0.4},
+    ],
+    "Légumes": [
+        {"nom":"Brocoli (cuit)",            "kcal": 35,"prot":2.4, "gluc":7.0, "lip":0.4, "fibres":3.3},
+        {"nom":"Épinards (crus)",           "kcal": 23,"prot":2.9, "gluc":3.6, "lip":0.4, "fibres":2.2},
+        {"nom":"Courgette (cuite)",         "kcal": 17,"prot":1.2, "gluc":3.6, "lip":0.1, "fibres":1.0},
+        {"nom":"Haricots verts (cuits)",    "kcal": 35,"prot":1.9, "gluc":7.9, "lip":0.1, "fibres":3.4},
+        {"nom":"Poivron (cru)",             "kcal": 31,"prot":1.0, "gluc":6.0, "lip":0.3, "fibres":2.1},
+        {"nom":"Tomate (crue)",             "kcal": 18,"prot":0.9, "gluc":3.9, "lip":0.2, "fibres":1.2},
+        {"nom":"Salade verte",              "kcal": 15,"prot":1.4, "gluc":2.4, "lip":0.2, "fibres":1.3},
+        {"nom":"Champignons (cuits)",       "kcal": 28,"prot":2.2, "gluc":5.3, "lip":0.1, "fibres":2.0},
+        {"nom":"Chou-fleur (cuit)",         "kcal": 23,"prot":1.9, "gluc":4.1, "lip":0.3, "fibres":2.3},
+        {"nom":"Concombre (cru)",           "kcal": 15,"prot":0.7, "gluc":3.1, "lip":0.1, "fibres":0.5},
+        {"nom":"Asperges (cuites)",         "kcal": 20,"prot":2.4, "gluc":3.7, "lip":0.1, "fibres":2.1},
+    ],
+    "Lipides": [
+        {"nom":"Huile d'olive",             "kcal":884,"prot":0.0, "gluc":0.0, "lip":100.0,"fibres":0},
+        {"nom":"Avocat",                    "kcal":160,"prot":2.0, "gluc":9.0, "lip":15.0, "fibres":6.7},
+        {"nom":"Amandes",                   "kcal":579,"prot":21.0,"gluc":22.0,"lip":49.0, "fibres":12.5},
+        {"nom":"Noix",                      "kcal":654,"prot":15.2,"gluc":13.7,"lip":65.0, "fibres":6.7},
+        {"nom":"Noix de cajou",             "kcal":553,"prot":18.2,"gluc":30.2,"lip":43.9, "fibres":3.3},
+        {"nom":"Beurre de cacahuète",       "kcal":588,"prot":25.0,"gluc":20.0,"lip":50.0, "fibres":6.0},
+        {"nom":"Beurre d'amande",           "kcal":614,"prot":21.1,"gluc":19.0,"lip":56.0, "fibres":7.0},
+        {"nom":"Graines de chia",           "kcal":490,"prot":17.0,"gluc":42.0,"lip":31.0, "fibres":34.4},
+        {"nom":"Graines de lin",            "kcal":534,"prot":18.3,"gluc":28.9,"lip":42.2, "fibres":27.3},
+        {"nom":"Beurre doux",               "kcal":717,"prot":0.6, "gluc":0.5, "lip":81.0, "fibres":0},
+        {"nom":"Chocolat noir 70%",         "kcal":598,"prot":7.8, "gluc":45.9,"lip":42.6, "fibres":10.9},
+    ],
+    "Divers": [
+        {"nom":"Miel",                      "kcal":304,"prot":0.3, "gluc":82.0,"lip":0.0, "fibres":0.2},
+        {"nom":"Confiture (moyenne)",       "kcal":250,"prot":0.5, "gluc":65.0,"lip":0.1, "fibres":1.0},
+        {"nom":"Jus d'orange (pur jus)",    "kcal": 45,"prot":0.7, "gluc":10.4,"lip":0.2, "fibres":0.4},
+        {"nom":"Cacao pur en poudre",       "kcal":228,"prot":20.0,"gluc":10.0,"lip":13.7,"fibres":33.2},
+    ],
+}

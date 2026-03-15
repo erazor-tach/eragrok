@@ -1,0 +1,23 @@
+[project]
+name = "threshold"
+version = "1.0.0"
+description = "THRESHOLD — Coach Bodybuilding"
+requires-python = ">=3.10"
+dependencies = [
+    "flet",
+    "flet-camera-webview",
+]
+
+[tool.flet]
+org = "com.threshold"
+product = "THRESHOLD"
+company = "THRESHOLD"
+copyright = "Copyright (C) 2025 THRESHOLD"
+
+# Permissions cross-platform (syntaxe courte Flet)
+permissions = ["camera"]
+
+# Features Android (AndroidManifest.xml)
+[tool.flet.android.feature]
+"android.hardware.camera" = true
+"android.hardware.camera.autofocus" = false

@@ -1,2 +1,0 @@
-<!-- AJOUTER CE SCRIPT AVANT </body> DANS CHAQUE PAGE -->
-<script src="js/navigation.js"></script>

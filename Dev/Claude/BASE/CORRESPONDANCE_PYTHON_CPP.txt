@@ -1,0 +1,153 @@
+================================================================================
+THRESHOLD - CORRESPONDANCE PYTHON → C++
+================================================================================
+Datation: 18 Mars 2026
+Nombre exact de modules: 54
+Règle d'or: LECTURE SEULE du codebase Python (E:\Projet\GIT\ia)
+
+================================================================================
+RÉSUMÉ : 54 MODULES C++ VS CODEBASE PYTHON
+================================================================================
+
+Architecture C++ (54 modules):
+  • Core/Shared_Modules : 10 modules partagés
+  • Core/Cycle : 10 modules
+  • Core/Nutrition : 9 modules
+  • Core/Workouts : 9 modules
+  • Core/Progress : 8 modules
+  • Core/Settings : 11 modules
+  • Core/Dashboard : 7 modules
+
+Chaque module C++ mappe directement sur la logique métier Python existante.
+
+================================================================================
+MODULES PARTAGÉS (10)
+================================================================================
+
+1. user_profile ← data/profil.py (gestion profils)
+2. preferences ← data/profil.py (paramètres globaux)
+3. food_catalogue ← data/meal_engine.py (~100 aliments)
+4. exercise_catalogue ← data/exercices_catalogue.py (~80 exercices)
+5. product_catalogue ← data/cycle.py (~50 produits)
+6. connected_devices ← (stub, peu de logique)
+7. backup_sync ← data/db.py (gestion SQLite)
+8. help_support ← (stub, contenu statique)
+9. about ← (stub, infos app)
+10. notification_settings ← (stub, configuration)
+
+================================================================================
+DOMAINE CYCLE (10 modules)
+================================================================================
+
+1. current_cycle ← data/cycle.py
+2. cycle_history ← data/cycle.py
+3. cycle_effects ← data/cycle.py
+4. cycle_notes ← data/cycle.py
+5. cycle_reminders ← data/injection_schedule.py
+6. cycle_settings ← data/cycle.py
+7. cycle_summary ← data/cycle.py
+8. cycle_timeline ← data/cycle.py
+9. cycle_preferences ← data/cycle.py
+10. injection_schedule ← data/injection_schedule.py
+
+================================================================================
+DOMAINE NUTRITION (9 modules)
+================================================================================
+
+1. daily_targets ← data/nutrition.py (calcul TDEE)
+2. meal_planner ← data/meal_engine.py (algorithme 7 passes CRITIQUE)
+3. meal_schedule ← data/nutrition.py
+4. meal_history ← data/nutrition.py
+5. bmi_calculator ← data/nutrition.py
+6. advanced_nutrition ← data/nutrition.py
+7. hydration_tracker ← data/nutrition.py
+8. shopping_list ← data/meal_engine.py
+9. nutrition_preferences ← data/nutrition.py
+
+================================================================================
+DOMAINE WORKOUTS (9 modules)
+================================================================================
+
+1. today_workout ← data/entrainement.py
+2. current_session ← data/entrainement.py
+3. workout_history ← data/entrainement.py
+4. workout_planning ← data/entrainement.py
+5. workout_preferences ← data/entrainement.py
+6. exercise_progress ← data/entrainement.py
+7. pro_techniques ← data/training_techniques.py
+8. weekly_volume ← data/entrainement.py
+9. achievements ← data/entrainement.py
+
+================================================================================
+DOMAINE PROGRESS (8 modules)
+================================================================================
+
+1. progress_analysis ← data/utils.py + data/entrainement.py
+2. progress_comparison ← data/utils.py
+3. weight_history ← data/nutrition.py
+4. personal_records ← data/entrainement.py
+5. predictions_ia ← data/utils.py
+6. unlocked_badges ← data/entrainement.py
+7. current_goals ← data/profil.py
+8. workout_session_log ← data/entrainement.py
+
+================================================================================
+DOMAINE SETTINGS (11 modules)
+================================================================================
+
+1. user_profile ← data/profil.py
+2. preferences ← data/profil.py (partagé)
+3. notification_settings ← (partagé)
+4. privacy_security ← data/profil.py
+5. workout_preferences ← data/entrainement.py
+6. nutrition_preferences ← data/nutrition.py
+7. cycle_preferences ← data/cycle.py
+8. backup_sync ← (partagé)
+9. help_support ← (partagé)
+10. about ← (partagé)
+11. connected_devices ← (partagé)
+
+================================================================================
+DOMAINE DASHBOARD (7 modules)
+================================================================================
+
+1. recent_activity ← (agrégation multi-sources)
+2. recovery_analysis ← (agrégation)
+3. ai_coach ← data/utils.py
+4. coach_advice ← (agrégation)
+5. strength_records ← data/entrainement.py
+6. set_rest ← data/entrainement.py
+7. advanced_nutrition ← data/nutrition.py
+
+================================================================================
+LOGIQUE MÉTIER CRITIQUE À CONVERTIR
+================================================================================
+
+TRÈS HAUTE PRIORITÉ:
+  • Algorithme 7 passes génération plans (meal_engine.py ~600 lignes)
+  • Formules TDEE Harris-Benedict (nutrition.py)
+  • Gestion calendrier injections (injection_schedule.py)
+
+HAUTE PRIORITÉ:
+  • IMC et zones (nutrition.py)
+  • Bases de données catalogues (meal_engine.py, exercices_catalogue.py)
+
+================================================================================
+DURÉE ESTIMÉE (avec logique Python en référence)
+================================================================================
+
+Phase 1 (Semaines 1-3): 10 modules partagés
+Phase 2 (Semaines 3-6): 38 modules domaines spécialisés
+Phase 3 (Semaines 6-9): 7 modules dashboard + intégration
+
+Total: 7-9 semaines (5-7 semaines réalistes avec code Python)
+
+================================================================================
+CONCLUSION
+================================================================================
+
+54 modules C++ mappant directement sur codebase Python existante.
+Aucune réinvention architecturale — traduction directe possible.
+Code Python = référence absolue de logique métier correcte.
+
+================================================================================

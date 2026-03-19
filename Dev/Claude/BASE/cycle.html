@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Threshold · Cycle</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts : Inter + Archivo Black -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Archivo+Black&display=swap" rel="stylesheet">
+  <style>
+    /* RESET & base mobile-first */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0a0c0e;
+      color: #e8eef2;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-size: 15px;
+    }
+
+    .app {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      max-width: 480px;
+      width: 100%;
+      margin: 0 auto;
+      background-color: #0f1115;
+      box-shadow: 0 0 0 1px #2a2e33;
+      border-radius: 28px 28px 0 0;
+      overflow: hidden;
+      position: relative;
+      padding-bottom: 80px;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .card, .cycle-card, .product-item, .history-item {
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 #ff8c4280; }
+      70% { box-shadow: 0 0 0 10px #ff8c4200; }
+      100% { box-shadow: 0 0 0 0 #ff8c4200; }
+    }
+    .pulse {
+      animation: pulse 1.5s infinite;
+    }
+
+    /* HEADER */
+    .mobile-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      background: #13171c;
+      border-bottom: 1px solid #2c323a;
+    }
+
+    .menu-icon {
+      font-size: 24px;
+      color: #ff9f5c;
+      background: none;
+      border: none;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: default;
+      transition: opacity 0.15s;
+    }
+    .menu-icon:active { opacity: 0.6; }
+
+    .logo-mobile {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .logo-mobile i {
+      font-size: 24px;
+      color: #ff8c42;
+      filter: drop-shadow(0 0 4px #ff8c4280);
+    }
+
+    .logo-mobile span {
+      font-weight: 700;
+      font-size: 18px;
+      background: linear-gradient(135deg, #ffb88c, #ff8c42);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 0.5px;
+    }
+
+    .profile-icon-mobile {
+      width: 40px;
+      height: 40px;
+      background: #262e38;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #ffbc8c;
+      border: 1px solid #404b58;
+      font-size: 15px;
+      cursor: default;
+      transition: 0.15s;
+    }
+    .profile-icon-mobile:active { background: #323e4c; }
+
+    /* MAIN CONTENT */
+    .main-content {
+      flex: 1;
+      padding: 20px 16px 24px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .welcome-block {
+      margin-bottom: 4px;
+    }
+
+    .welcome-block h2 {
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .welcome-block .highlight {
+      color: #ffa55c;
+    }
+
+    .welcome-block p {
+      color: #8e9fb1;
+      font-size: 12px;
+    }
+
+    .search-mobile {
+      background-color: #1e232b;
+      border-radius: 40px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid #323c48;
+      margin: 8px 0 4px;
+      transition: border-color 0.15s;
+    }
+    .search-mobile:focus-within { border-color: #ff8c42; }
+
+    .search-mobile i {
+      color: #ff9f5c;
+      font-size: 14px;
+    }
+
+    .search-mobile input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #f0f6fc;
+      font-size: 13px;
+      width: 100%;
+    }
+
+    .search-mobile input::placeholder {
+      color: #6a7e96;
+    }
+
+    /* Style générique des cartes */
+    .card {
+      background: #1a1e26;
+      border-radius: 28px;
+      padding: 20px;
+      border: 1px solid #2e353f;
+      box-shadow: 0 6px 14px #00000080;
+      width: 100%;
+      transition: transform 0.1s, border-color 0.2s;
+    }
+    .card:active { transform: scale(0.99); }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .card-header h3 {
+      font-weight: 600;
+      font-size: 16px;
+      color: #e8eef2;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-header i {
+      color: #ff8c42;
+      font-size: 18px;
+    }
+
+    /* Badge */
+    .badge {
+      background: #3a2c1c;
+      color: #ff8c42;
+      border: 1px solid #ff8c42;
+      border-radius: 40px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Cycle en cours */
+    .cycle-progress {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .cycle-ring {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: conic-gradient(#ff8c42 0deg 200deg, #39414d 200deg 360deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 20px;
+      position: relative;
+    }
+    .cycle-ring::before {
+      content: '';
+      width: 64px;
+      height: 64px;
+      background: #1a1e26;
+      border-radius: 50%;
+      position: absolute;
+    }
+    .cycle-ring span {
+      position: relative;
+      z-index: 2;
+    }
+    .cycle-info {
+      flex: 1;
+    }
+    .cycle-name {
+      font-weight: 600;
+      font-size: 18px;
+      color: #ffbc8c;
+    }
+    .cycle-dates {
+      font-size: 12px;
+      color: #a0b2c9;
+    }
+    .cycle-desc {
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .product-list {
+      margin-top: 12px;
+    }
+    .product-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #0f131a;
+      border-radius: 20px;
+      padding: 12px;
+      margin-bottom: 8px;
+    }
+    .product-icon {
+      width: 36px;
+      height: 36px;
+      background: #2a333f;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ff8c42;
+    }
+    .product-details {
+      flex: 1;
+    }
+    .product-name {
+      font-weight: 600;
+    }
+    .product-dose {
+      font-size: 12px;
+      color: #ffbc8c;
+    }
+    .product-schedule {
+      font-size: 11px;
+      color: #a0b2c9;
+    }
+
+    /* Planning d'injection */
+    .injection-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .injection-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #0f131a;
+      border-radius: 20px;
+      padding: 10px 16px;
+    }
+    .injection-day {
+      font-weight: 600;
+    }
+    .injection-dose {
+      background: #262e38;
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-size: 12px;
+    }
+    .injection-status {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ff8c42;
+      box-shadow: 0 0 8px #ff8c42;
+    }
+    .injection-status.done { background: #8bc34a; box-shadow: 0 0 8px #8bc34a; }
+
+    /* Paramètres du cycle */
+    .param-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #2b323c;
+    }
+    .param-row:last-child { border-bottom: none; }
+    .param-label {
+      color: #b4c3d6;
+    }
+    .param-value {
+      font-weight: 600;
+      color: #ffbc8c;
+    }
+
+    /* Résumé recommandations */
+    .rec-card {
+      background: #0f131a;
+      border-radius: 20px;
+      padding: 16px;
+      margin-top: 8px;
+    }
+    .rec-title {
+      color: #ffbc8c;
+      font-weight: 600;
+    }
+    .rec-text {
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    /* Notes */
+    .note-area {
+      background: #0f131a;
+      border-radius: 20px;
+      padding: 16px;
+      min-height: 80px;
+      font-size: 13px;
+      color: #b1c2d6;
+    }
+
+    /* Timeline du cycle */
+    .timeline {
+      display: flex;
+      justify-content: space-between;
+      margin: 16px 0;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 16px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #2f3947;
+      z-index: 0;
+    }
+    .timeline-point {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+      z-index: 1;
+    }
+    .point-dot {
+      width: 16px;
+      height: 16px;
+      background: #ff8c42;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #ff8c42;
+    }
+    .point-dot.inactive { background: #3a4555; box-shadow: none; }
+    .point-label {
+      font-size: 10px;
+      color: #a0b2c9;
+    }
+
+    /* Catalogue produits */
+    .catalogue-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 12px 0;
+    }
+    .catalogue-item {
+      background: #0f131a;
+      border-radius: 20px;
+      padding: 12px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      text-align: center;
+    }
+    .catalogue-item i {
+      font-size: 28px;
+      color: #ff8c42;
+    }
+    .catalogue-item span {
+      font-weight: 600;
+      font-size: 12px;
+    }
+    .catalogue-item .small {
+      font-size: 9px;
+      color: #a0b2c9;
+    }
+
+    /* Historique des cycles */
+    .history-item {
+      background: #0f131a;
+      border-radius: 20px;
+      padding: 12px;
+      margin-bottom: 8px;
+    }
+    .history-header {
+      display: flex;
+      justify-content: space-between;
+    }
+    .history-title {
+      font-weight: 600;
+      color: #ffbc8c;
+    }
+    .history-date {
+      font-size: 11px;
+      color: #a0b2c9;
+    }
+    .history-prods {
+      font-size: 12px;
+      margin-top: 4px;
+    }
+    .history-rating {
+      display: flex;
+      gap: 4px;
+      margin-top: 6px;
+      color: #ff8c42;
+    }
+
+    /* Rappels */
+    .reminder-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #0f131a;
+      border-radius: 20px;
+      padding: 12px 16px;
+      margin-bottom: 8px;
+    }
+    .reminder-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .reminder-time {
+      font-weight: 600;
+    }
+    .reminder-desc {
+      font-size: 12px;
+      color: #a0b2c9;
+    }
+    .toggle-switch {
+      width: 40px;
+      height: 22px;
+      background: #262e38;
+      border-radius: 40px;
+      position: relative;
+      border: 1px solid #475460;
+    }
+    .toggle-switch.active {
+      background: #ff8c42;
+    }
+    .toggle-switch::after {
+      content: '';
+      width: 18px;
+      height: 18px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 1px;
+      left: 1px;
+      transition: left 0.2s;
+    }
+    .toggle-switch.active::after {
+      left: 19px;
+    }
+
+    .btn {
+      background: #2e3743;
+      border: none;
+      color: #eef3f8;
+      padding: 12px 0;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 14px;
+      border: 1px solid #475460;
+      text-align: center;
+      cursor: default;
+      transition: background 0.1s, transform 0.1s;
+    }
+    .btn:active {
+      background: #3e4a5a;
+      transform: scale(0.97);
+    }
+    .btn-primary {
+      background: linear-gradient(145deg, #ff8c42, #e0662a);
+      border: 1px solid #ffa766;
+      color: #0f1217;
+      font-weight: 700;
+    }
+
+    .text-small { font-size: 11px; color: #8699b0; }
+    .highlight { color: #ffad70; }
+    hr { border: 0.5px solid #2f3742; margin: 16px 0; }
+
+    /* Bottom navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #13171e;
+      border-top: 1px solid #2c343e;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 6px 4px 10px;
+      max-width: 480px;
+      margin: 0 auto;
+      right: 0;
+      border-radius: 28px 28px 0 0;
+      box-shadow: 0 -4px 12px #00000080;
+      z-index: 10;
+    }
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      color: #8a9bb0;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: default;
+      padding: 4px 6px;
+      border-radius: 40px;
+      position: relative;
+      transition: color 0.15s;
+    }
+    .nav-item:active { opacity: 0.7; }
+    .nav-item i { font-size: 22px; color: #8a9bb0; }
+    .nav-item.active { color: #ff9f5c; }
+    .nav-item.active i { color: #ff9f5c; text-shadow: 0 0 8px #ff8c4280; }
+    .nav-item.active::after {
+      content: '';
+      display: block;
+      width: 4px;
+      height: 4px;
+      background: #ff9f5c;
+      border-radius: 50%;
+      margin-top: 2px;
+      box-shadow: 0 0 6px #ff9f5c;
+    }
+
+    /* FAB */
+    .fab {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(145deg, #ff8c42, #e0662a);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0f1217;
+      font-size: 28px;
+      box-shadow: 0 6px 14px #000000b0, 0 0 0 2px #ffa766;
+      z-index: 20;
+      cursor: default;
+      transition: transform 0.1s, box-shadow 0.2s;
+      animation: pulse 2s infinite;
+    }
+    .fab:active {
+      transform: scale(0.92);
+      box-shadow: 0 4px 8px #000000, 0 0 0 2px #ff8c42;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="mobile-header">
+      <div class="menu-icon"><i class="fas fa-bars"></i></div>
+      <div class="logo-mobile">
+        <i class="fas fa-dumbbell"></i>
+        <span>THRESHOLD</span>
+      </div>
+      <div class="profile-icon-mobile">ER</div>
+    </header>
+
+    <div class="main-content">
+      <div class="welcome-block">
+        <h2>Cycle, <span class="highlight">Erazor</span> 💉</h2>
+        <p>Maîtrise ta chimie.</p>
+      </div>
+
+      <div class="search-mobile">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Produit, cycle...">
+      </div>
+
+      <!-- Cycle en cours -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-syringe"></i> Cycle en cours</h3>
+          <i class="fas fa-ellipsis-h"></i>
+        </div>
+        <div class="cycle-progress">
+          <div class="cycle-ring"><span>56%</span></div>
+          <div class="cycle-info">
+            <div class="cycle-name">Prise de masse #4</div>
+            <div class="cycle-dates">Début: 01/02/2026 · Fin: 15/05/2026</div>
+            <div class="cycle-desc">Test E 500mg/sem · Tren A 200mg/sem</div>
+          </div>
+        </div>
+        <div class="product-list">
+          <div class="product-item">
+            <div class="product-icon"><i class="fas fa-flask"></i></div>
+            <div class="product-details">
+              <div class="product-name">Testostérone Enanthate</div>
+              <div class="product-dose">500 mg / semaine</div>
+              <div class="product-schedule">Injection lundi jeudi</div>
+            </div>
+            <span class="badge">IM</span>
+          </div>
+          <div class="product-item">
+            <div class="product-icon"><i class="fas fa-bolt"></i></div>
+            <div class="product-details">
+              <div class="product-name">Trenbolone Acétate</div>
+              <div class="product-dose">200 mg / semaine</div>
+              <div class="product-schedule">Injection lundi jeudi</div>
+            </div>
+            <span class="badge">IM</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Planning d'injection -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-calendar-check"></i> Planning d'injection</h3>
+          <i class="fas fa-bell"></i>
+        </div>
+        <div class="injection-grid">
+          <div class="injection-row">
+            <span class="injection-day">Lundi 17/03</span>
+            <span class="injection-dose">Test 250mg + Tren 100mg</span>
+            <span class="injection-status done"></span>
+          </div>
+          <div class="injection-row">
+            <span class="injection-day">Jeudi 20/03</span>
+            <span class="injection-dose">Test 250mg + Tren 100mg</span>
+            <span class="injection-status"></span>
+          </div>
+          <div class="injection-row">
+            <span class="injection-day">Lundi 24/03</span>
+            <span class="injection-dose">Test 250mg + Tren 100mg</span>
+            <span class="injection-status"></span>
+          </div>
+        </div>
+        <button class="btn" style="margin-top:12px;">Voir tout le planning</button>
+      </div>
+
+      <!-- Paramètres du cycle -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-sliders-h"></i> Paramètres du cycle</h3>
+          <i class="fas fa-pen"></i>
+        </div>
+        <div class="param-row">
+          <span class="param-label">Durée totale</span>
+          <span class="param-value">12 semaines</span>
+        </div>
+        <div class="param-row">
+          <span class="param-label">Dosage Test</span>
+          <span class="param-value">500 mg/sem</span>
+        </div>
+        <div class="param-row">
+          <span class="param-label">Dosage Tren</span>
+          <span class="param-value">200 mg/sem</span>
+        </div>
+        <div class="param-row">
+          <span class="param-label">Début PCT</span>
+          <span class="param-value">15/05/2026</span>
+        </div>
+      </div>
+
+      <!-- Résumé et recommandations -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-clipboard-list"></i> Résumé & recommandations</h3>
+          <i class="fas fa-info-circle"></i>
+        </div>
+        <div class="rec-card">
+          <div class="rec-title">Suivi sanguin</div>
+          <div class="rec-text">Prévoir prise de sang à 4 semaines (fin mars). Vérifier LH, FSH, E2.</div>
+        </div>
+        <div class="rec-card">
+          <div class="rec-title">Effets secondaires potentiels</div>
+          <div class="rec-text">Gynéco, acné, agressivité. Avoir tamoxifène et exémestane à portée.</div>
+        </div>
+        <div class="rec-card">
+          <div class="rec-title">Hydratation</div>
+          <div class="rec-text">Boire minimum 3L/jour pour protéger les reins.</div>
+        </div>
+      </div>
+
+      <!-- Notes personnelles -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-pencil-alt"></i> Notes</h3>
+          <i class="fas fa-plus-circle"></i>
+        </div>
+        <div class="note-area">
+          Semaine 6 : légère irritabilité, bonnes pompes. Penser à ajuster le sommeil.
+        </div>
+      </div>
+
+      <!-- Timeline du cycle -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-chart-line"></i> Timeline du cycle</h3>
+          <i class="fas fa-calendar-alt"></i>
+        </div>
+        <div class="timeline">
+          <div class="timeline-point">
+            <div class="point-dot"></div>
+            <span class="point-label">S1</span>
+          </div>
+          <div class="timeline-point">
+            <div class="point-dot"></div>
+            <span class="point-label">S2</span>
+          </div>
+          <div class="timeline-point">
+            <div class="point-dot"></div>
+            <span class="point-label">S3</span>
+          </div>
+          <div class="timeline-point">
+            <div class="point-dot"></div>
+            <span class="point-label">S4</span>
+          </div>
+          <div class="timeline-point">
+            <div class="point-dot"></div>
+            <span class="point-label">S5</span>
+          </div>
+          <div class="timeline-point">
+            <div class="point-dot"></div>
+            <span class="point-label">S6</span>
+          </div>
+          <div class="timeline-point">
+            <div class="point-dot inactive"></div>
+            <span class="point-label">S7</span>
+          </div>
+          <div class="timeline-point">
+            <div class="point-dot inactive"></div>
+            <span class="point-label">S8</span>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-top:8px;">
+          <span class="badge">Phase d'attaque</span>
+          <span class="badge">Phase de maintien</span>
+          <span class="badge">PCT</span>
+        </div>
+      </div>
+
+      <!-- Catalogue des produits -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-database"></i> Catalogue produits</h3>
+          <i class="fas fa-barcode"></i>
+        </div>
+        <div class="catalogue-grid">
+          <div class="catalogue-item"><i class="fas fa-flask"></i><span>Test E</span><span class="small">250mg/ml</span></div>
+          <div class="catalogue-item"><i class="fas fa-bolt"></i><span>Tren A</span><span class="small">100mg/ml</span></div>
+          <div class="catalogue-item"><i class="fas fa-capsules"></i><span>Anavar</span><span class="small">50mg</span></div>
+          <div class="catalogue-item"><i class="fas fa-tablets"></i><span>Dianabol</span><span class="small">20mg</span></div>
+          <div class="catalogue-item"><i class="fas fa-syringe"></i><span>Deca</span><span class="small">300mg</span></div>
+          <div class="catalogue-item"><i class="fas fa-pills"></i><span>Clen</span><span class="small">40mcg</span></div>
+        </div>
+        <button class="btn" style="margin-top:12px;">Voir tout le catalogue</button>
+      </div>
+
+      <!-- Historique des cycles -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-history"></i> Historique des cycles</h3>
+          <i class="fas fa-filter"></i>
+        </div>
+        <div class="history-item">
+          <div class="history-header">
+            <span class="history-title">Prise de masse #3</span>
+            <span class="history-date">Sept-Déc 2025</span>
+          </div>
+          <div class="history-prods">Test E 500mg · Deca 300mg</div>
+          <div class="history-rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+          </div>
+        </div>
+        <div class="history-item">
+          <div class="history-header">
+            <span class="history-title">Sèche #2</span>
+            <span class="history-date">Avril-Juin 2025</span>
+          </div>
+          <div class="history-prods">Test P 350mg · Tren A 210mg · Anavar</div>
+          <div class="history-rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+        </div>
+        <div class="history-item">
+          <div class="history-header">
+            <span class="history-title">Premier cycle</span>
+            <span class="history-date">Janv-Mars 2025</span>
+          </div>
+          <div class="history-prods">Test E 400mg</div>
+          <div class="history-rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          </div>
+        </div>
+        <button class="btn" style="margin-top:8px;">Voir tous les cycles</button>
+      </div>
+
+      <!-- Rappels de prise -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-bell"></i> Rappels actifs</h3>
+          <i class="fas fa-plus-circle"></i>
+        </div>
+        <div class="reminder-row">
+          <div class="reminder-info">
+            <span class="reminder-time">08:00</span>
+            <span class="reminder-desc">Injection Test/Tren (lundi/jeudi)</span>
+          </div>
+          <div class="toggle-switch active"></div>
+        </div>
+        <div class="reminder-row">
+          <div class="reminder-info">
+            <span class="reminder-time">20:00</span>
+            <span class="reminder-desc">Compléments : oméga3, vit D</span>
+          </div>
+          <div class="toggle-switch"></div>
+        </div>
+        <div class="reminder-row">
+          <div class="reminder-info">
+            <span class="reminder-time">22:00</span>
+            <span class="reminder-desc">Mélatonine (si besoin)</span>
+          </div>
+          <div class="toggle-switch"></div>
+        </div>
+      </div>
+
+      <!-- Suivi des effets (optionnel) -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-chart-bar"></i> Effets ressentis</h3>
+          <i class="fas fa-edit"></i>
+        </div>
+        <div style="display:flex; gap:16px; justify-content:center; margin:8px 0;">
+          <span><span class="highlight">Énergie</span> ⭐⭐⭐⭐</span>
+          <span><span class="highlight">Libido</span> ⭐⭐⭐⭐⭐</span>
+          <span><span class="highlight">Sommeil</span> ⭐⭐⭐</span>
+        </div>
+        <div style="display:flex; gap:16px; justify-content:center;">
+          <span><span class="highlight">Agressivité</span> ⭐⭐</span>
+          <span><span class="highlight">Acné</span> ⭐</span>
+        </div>
+      </div>
+
+      <div style="height: 20px;"></div>
+    </div>
+
+    <!-- FAB -->
+    <div class="fab" role="button" aria-label="Ajouter une prise"><i class="fas fa-plus"></i></div>
+
+    <!-- Bottom navigation (onglet Cycle actif) -->
+    <nav class="bottom-nav">
+      <div class="nav-item"><i class="fas fa-chart-pie"></i><span>Dashboard</span></div>
+      <div class="nav-item"><i class="fas fa-calendar-alt"></i><span>Workouts</span></div>
+      <div class="nav-item"><i class="fas fa-utensils"></i><span>Nutrition</span></div>
+      <div class="nav-item"><i class="fas fa-chart-line"></i><span>Progrès</span></div>
+      <div class="nav-item active"><i class="fas fa-exclamation-triangle"></i><span>Cycle</span></div>
+      <div class="nav-item"><i class="fas fa-cog"></i><span>Settings</span></div>
+    </nav>
+  </div>
+
+  <div style="text-align: center; color: #3f4a57; font-size: 11px; padding: 8px; background: #0a0c0e;">threshold · cycle complet</div>
+
+  <script>
+    (function() {
+      // Petite interaction pour les toggles (simulation)
+      const toggles = document.querySelectorAll('.toggle-switch');
+      toggles.forEach(t => {
+        t.addEventListener('click', function(e) {
+          e.preventDefault();
+          this.classList.toggle('active');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

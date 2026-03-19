@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Threshold · Nutrition</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts : Inter + Archivo Black -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Archivo+Black&display=swap" rel="stylesheet">
+  <style>
+    /* RESET & base mobile-first */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0a0c0e;
+      color: #e8eef2;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-size: 15px;
+    }
+
+    .app {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      max-width: 480px;
+      width: 100%;
+      margin: 0 auto;
+      background-color: #0f1115;
+      box-shadow: 0 0 0 1px #2a2e33;
+      border-radius: 28px 28px 0 0;
+      overflow: hidden;
+      position: relative;
+      padding-bottom: 80px;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .card, .session-card, .wellness-item, .timeline-item, .catalogue-item, .history-item {
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 #ff8c4280; }
+      70% { box-shadow: 0 0 0 10px #ff8c4200; }
+      100% { box-shadow: 0 0 0 0 #ff8c4200; }
+    }
+    .pulse {
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes scan {
+      0% { transform: translateX(-100%); opacity: 0; }
+      50% { transform: translateX(0); opacity: 1; }
+      100% { transform: translateX(100%); opacity: 0; }
+    }
+    .scan-animation {
+      position: relative;
+      overflow: hidden;
+    }
+    .scan-animation::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #ff8c42, transparent);
+      animation: scan 1.5s infinite;
+    }
+
+    /* HEADER */
+    .mobile-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      background: #13171c;
+      border-bottom: 1px solid #2c323a;
+    }
+
+    .menu-icon {
+      font-size: 24px;
+      color: #ff9f5c;
+      background: none;
+      border: none;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: default;
+      transition: opacity 0.15s;
+    }
+    .menu-icon:active { opacity: 0.6; }
+
+    .logo-mobile {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .logo-mobile i {
+      font-size: 24px;
+      color: #ff8c42;
+      filter: drop-shadow(0 0 4px #ff8c4280);
+    }
+
+    .logo-mobile span {
+      font-weight: 700;
+      font-size: 18px;
+      background: linear-gradient(135deg, #ffb88c, #ff8c42);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 0.5px;
+    }
+
+    .profile-icon-mobile {
+      width: 40px;
+      height: 40px;
+      background: #262e38;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #ffbc8c;
+      border: 1px solid #404b58;
+      font-size: 15px;
+      cursor: default;
+      transition: 0.15s;
+    }
+    .profile-icon-mobile:active { background: #323e4c; }
+
+    /* MAIN CONTENT */
+    .main-content {
+      flex: 1;
+      padding: 20px 16px 24px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .welcome-block {
+      margin-bottom: 4px;
+    }
+
+    .welcome-block h2 {
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .welcome-block .highlight {
+      color: #ffa55c;
+    }
+
+    .welcome-block p {
+      color: #8e9fb1;
+      font-size: 12px;
+    }
+
+    .search-mobile {
+      background-color: #1e232b;
+      border-radius: 40px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid #323c48;
+      margin: 8px 0 4px;
+      transition: border-color 0.15s;
+    }
+    .search-mobile:focus-within { border-color: #ff8c42; }
+
+    .search-mobile i {
+      color: #ff9f5c;
+      font-size: 14px;
+    }
+
+    .search-mobile input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #f0f6fc;
+      font-size: 13px;
+      width: 100%;
+    }
+
+    .search-mobile input::placeholder {
+      color: #6a7e96;
+    }
+
+    /* Style générique des cartes */
+    .card {
+      background: #1a1e26;
+      border-radius: 28px;
+      padding: 20px;
+      border: 1px solid #2e353f;
+      box-shadow: 0 6px 14px #00000080;
+      width: 100%;
+      transition: transform 0.1s, border-color 0.2s;
+    }
+    .card:active { transform: scale(0.99); }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .card-header h3 {
+      font-weight: 600;
+      font-size: 16px;
+      color: #e8eef2;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-header i {
+      color: #ff8c42;
+      font-size: 18px;
+    }
+
+    /* Badge */
+    .badge {
+      background: #3a2c1c;
+      color: #ff8c42;
+      border: 1px solid #ff8c42;
+      border-radius: 40px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* IMC */
+    .imc-slider {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 12px 0;
+    }
+    .slider-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .slider-label {
+      font-size: 14px;
+    }
+    .slider-value {
+      background: #262e38;
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-weight: 600;
+      color: #ffbc8c;
+    }
+    input[type=range] {
+      width: 100%;
+      height: 6px;
+      background: #262e38;
+      border-radius: 10px;
+      outline: none;
+      -webkit-appearance: none;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      background: #ff8c42;
+      border-radius: 50%;
+      cursor: default;
+      box-shadow: 0 0 8px #ff8c42;
+    }
+    .imc-result {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-top: 12px;
+    }
+    .imc-number {
+      font-size: 36px;
+      font-family: 'Archivo Black', sans-serif;
+      color: #ffb07c;
+    }
+    .imc-category {
+      background: #1b2a2a;
+      padding: 6px 12px;
+      border-radius: 40px;
+      color: #8bc34a;
+    }
+
+    /* Générateur de plan */
+    .plan-generator {
+      display: flex;
+      gap: 12px;
+      margin: 12px 0;
+      flex-wrap: wrap;
+    }
+    .plan-option {
+      background: #0f131a;
+      border-radius: 40px;
+      padding: 8px 16px;
+      font-size: 13px;
+      cursor: default;
+      border: 1px solid transparent;
+    }
+    .plan-option.active {
+      border-color: #ff8c42;
+      background: #2a2a2a;
+      color: #ffbc8c;
+    }
+    .plan-option:active { background: #2a333f; }
+
+    .meal-suggestion {
+      background: #0f131a;
+      border-radius: 20px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+    .meal-suggestion .meal-title {
+      font-weight: 600;
+      color: #ffbc8c;
+    }
+    .meal-suggestion .meal-desc {
+      font-size: 12px;
+      margin: 8px 0;
+    }
+    .meal-macros {
+      display: flex;
+      gap: 16px;
+      font-size: 11px;
+    }
+
+    /* Planning repas */
+    .meal-planning-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .meal-day {
+      background: #0f131a;
+      border-radius: 20px;
+      padding: 12px;
+    }
+    .meal-day-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      color: #ffbc8c;
+    }
+    .meal-day-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .meal-tag {
+      background: #262e38;
+      border-radius: 40px;
+      padding: 4px 12px;
+      font-size: 11px;
+    }
+
+    /* Liste de courses */
+    .shopping-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .shopping-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #0f131a;
+      border-radius: 40px;
+      padding: 8px 16px;
+    }
+    .shopping-item input[type=checkbox] {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: #262e38;
+      border-radius: 6px;
+      border: 1px solid #475460;
+      cursor: default;
+    }
+    .shopping-item input[type=checkbox]:checked {
+      background: #ff8c42;
+      border-color: #ff8c42;
+      position: relative;
+    }
+    .shopping-item input[type=checkbox]:checked::after {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      color: #0f1217;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .shopping-item span {
+      flex: 1;
+    }
+    .shopping-item .item-qty {
+      color: #ffbc8c;
+    }
+
+    /* Historique */
+    .history-item {
+      background: #0f131a;
+      border-radius: 20px;
+      padding: 12px;
+      margin-bottom: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .history-header {
+      display: flex;
+      justify-content: space-between;
+    }
+    .history-date {
+      color: #ffbc8c;
+      font-weight: 600;
+    }
+    .history-total {
+      font-size: 11px;
+      background: #262e38;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+    .history-meals {
+      font-size: 12px;
+      color: #a0b2c9;
+    }
+
+    /* Catalogue aliments */
+    .catalogue-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 12px 0;
+    }
+    .catalogue-item {
+      background: #0f131a;
+      border-radius: 20px;
+      padding: 12px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      text-align: center;
+    }
+    .catalogue-item i {
+      font-size: 28px;
+      color: #ff8c42;
+    }
+    .catalogue-item span {
+      font-weight: 600;
+      font-size: 12px;
+    }
+    .catalogue-item .small {
+      font-size: 9px;
+      color: #a0b2c9;
+    }
+
+    /* Scanner */
+    .scanner-area {
+      background: #0f131a;
+      border-radius: 40px;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      margin-top: 8px;
+      position: relative;
+    }
+    .scanner-icon {
+      font-size: 48px;
+      color: #ff8c42;
+    }
+    .scanner-btn {
+      background: #262e38;
+      border: none;
+      color: #ffbc8c;
+      padding: 12px 24px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 14px;
+      border: 1px solid #475460;
+    }
+    .scanner-btn:active { background: #3a4555; }
+
+    /* Objectifs */
+    .daily-goals {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 12px;
+    }
+    .goal-item {
+      text-align: center;
+    }
+    .goal-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffbc8c;
+    }
+    .goal-label {
+      font-size: 11px;
+      color: #8a9bb0;
+    }
+
+    .progress-bar-bg {
+      height: 8px;
+      background: #262e38;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 8px 0;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ffa75c, #ff6a42);
+      width: 0%;
+      transition: width 0.8s;
+    }
+
+    .btn {
+      background: #2e3743;
+      border: none;
+      color: #eef3f8;
+      padding: 12px 0;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 14px;
+      border: 1px solid #475460;
+      text-align: center;
+      cursor: default;
+      transition: background 0.1s, transform 0.1s;
+    }
+    .btn:active {
+      background: #3e4a5a;
+      transform: scale(0.97);
+    }
+    .btn-primary {
+      background: linear-gradient(145deg, #ff8c42, #e0662a);
+      border: 1px solid #ffa766;
+      color: #0f1217;
+      font-weight: 700;
+    }
+
+    .text-small { font-size: 11px; color: #8699b0; }
+    .highlight { color: #ffad70; }
+    hr { border: 0.5px solid #2f3742; margin: 16px 0; }
+
+    /* Bottom navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #13171e;
+      border-top: 1px solid #2c343e;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 6px 4px 10px;
+      max-width: 480px;
+      margin: 0 auto;
+      right: 0;
+      border-radius: 28px 28px 0 0;
+      box-shadow: 0 -4px 12px #00000080;
+      z-index: 10;
+    }
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      color: #8a9bb0;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: default;
+      padding: 4px 6px;
+      border-radius: 40px;
+      position: relative;
+      transition: color 0.15s;
+    }
+    .nav-item:active { opacity: 0.7; }
+    .nav-item i { font-size: 22px; color: #8a9bb0; }
+    .nav-item.active { color: #ff9f5c; }
+    .nav-item.active i { color: #ff9f5c; text-shadow: 0 0 8px #ff8c4280; }
+    .nav-item.active::after {
+      content: '';
+      display: block;
+      width: 4px;
+      height: 4px;
+      background: #ff9f5c;
+      border-radius: 50%;
+      margin-top: 2px;
+      box-shadow: 0 0 6px #ff9f5c;
+    }
+
+    /* FAB */
+    .fab {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(145deg, #ff8c42, #e0662a);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0f1217;
+      font-size: 28px;
+      box-shadow: 0 6px 14px #000000b0, 0 0 0 2px #ffa766;
+      z-index: 20;
+      cursor: default;
+      transition: transform 0.1s, box-shadow 0.2s;
+      animation: pulse 2s infinite;
+    }
+    .fab:active {
+      transform: scale(0.92);
+      box-shadow: 0 4px 8px #000000, 0 0 0 2px #ff8c42;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="mobile-header">
+      <div class="menu-icon"><i class="fas fa-bars"></i></div>
+      <div class="logo-mobile">
+        <i class="fas fa-dumbbell"></i>
+        <span>THRESHOLD</span>
+      </div>
+      <div class="profile-icon-mobile">ER</div>
+    </header>
+
+    <div class="main-content">
+      <div class="welcome-block">
+        <h2>Nutrition, <span class="highlight">Erazor</span> 🥩</h2>
+        <p>Mange comme un guerrier.</p>
+      </div>
+
+      <div class="search-mobile">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Aliment, repas...">
+      </div>
+
+      <!-- Carte IMC interactive -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-calculator"></i> Calculateur IMC</h3>
+          <i class="fas fa-edit"></i>
+        </div>
+        <div class="imc-slider">
+          <div class="slider-row">
+            <span class="slider-label">Taille (cm)</span>
+            <span class="slider-value" id="tailleValue">180</span>
+          </div>
+          <input type="range" id="taille" min="140" max="220" value="180" step="1">
+          <div class="slider-row">
+            <span class="slider-label">Poids (kg)</span>
+            <span class="slider-value" id="poidsValue">85</span>
+          </div>
+          <input type="range" id="poids" min="40" max="150" value="85" step="0.5">
+        </div>
+        <div class="imc-result">
+          <span class="imc-number" id="imcDisplay">26.2</span>
+          <span class="imc-category" id="imcCategory">Surpoids léger</span>
+        </div>
+        <div class="text-small" style="margin-top:8px;">IMC = poids / (taille²) · interprétation indicative</div>
+      </div>
+
+      <!-- Générateur de plan alimentaire -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-robot"></i> Générateur de plan</h3>
+          <i class="fas fa-magic"></i>
+        </div>
+        <div class="plan-generator">
+          <div class="plan-option active" id="planMasse">Prise de masse</div>
+          <div class="plan-option" id="planSeche">Sèche</div>
+          <div class="plan-option" id="planMaintien">Maintien</div>
+        </div>
+        <div class="meal-suggestion" id="mealSuggestion">
+          <div class="meal-title">Petit-déjeuner</div>
+          <div class="meal-desc">Flocons d'avoine, lait, whey, beurre de cacahuète, banane</div>
+          <div class="meal-macros">
+            <span><span class="highlight">45P</span> / <span class="highlight">80G</span> / <span class="highlight">20L</span></span>
+            <span>~ 680 kcal</span>
+          </div>
+        </div>
+        <div style="display:flex; gap:8px; margin-top:12px;">
+          <button class="btn btn-primary" style="flex:2;">Générer</button>
+          <button class="btn" style="flex:1;"><i class="fas fa-save"></i></button>
+        </div>
+      </div>
+
+      <!-- Planning alimentaire (semaine) -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-calendar-week"></i> Planning repas</h3>
+          <i class="fas fa-chevron-right"></i>
+        </div>
+        <div class="meal-planning-grid">
+          <div class="meal-day">
+            <div class="meal-day-header"><span>Lundi</span> <span class="badge">2 350 kcal</span></div>
+            <div class="meal-day-items">
+              <span class="meal-tag">Petit-déj: Omelette</span>
+              <span class="meal-tag">Déj: Poulet riz</span>
+              <span class="meal-tag">Dîner: Poisson patates</span>
+              <span class="meal-tag">Collation: Whey</span>
+            </div>
+          </div>
+          <div class="meal-day">
+            <div class="meal-day-header"><span>Mardi</span> <span class="badge">2 410 kcal</span></div>
+            <div class="meal-day-items">
+              <span class="meal-tag">Petit-déj: Porridge</span>
+              <span class="meal-tag">Déj: Boeuf pâtes</span>
+              <span class="meal-tag">Dîner: Salade thon</span>
+            </div>
+          </div>
+        </div>
+        <button class="btn" style="margin-top:12px;">Voir semaine complète</button>
+      </div>
+
+      <!-- Liste de courses -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-shopping-cart"></i> Liste de courses</h3>
+          <i class="fas fa-plus-circle"></i>
+        </div>
+        <div class="shopping-list">
+          <div class="shopping-item">
+            <input type="checkbox" checked> <span>Blanc de poulet</span> <span class="item-qty">500g</span>
+          </div>
+          <div class="shopping-item">
+            <input type="checkbox"> <span>Riz basmati</span> <span class="item-qty">1kg</span>
+          </div>
+          <div class="shopping-item">
+            <input type="checkbox"> <span>Oeufs</span> <span class="item-qty">12</span>
+          </div>
+          <div class="shopping-item">
+            <input type="checkbox"> <span>Whey chocolat</span> <span class="item-qty">750g</span>
+          </div>
+          <div class="shopping-item">
+            <input type="checkbox"> <span>Bananes</span> <span class="item-qty">6</span>
+          </div>
+        </div>
+        <div style="display:flex; gap:8px; margin-top:12px;">
+          <button class="btn" style="flex:1;">Cocher tout</button>
+          <button class="btn btn-primary" style="flex:1;">Ajouter</button>
+        </div>
+      </div>
+
+      <!-- Historique des repas -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-history"></i> Historique</h3>
+          <i class="fas fa-filter"></i>
+        </div>
+        <div class="history-item">
+          <div class="history-header">
+            <span class="history-date">Hier</span>
+            <span class="history-total">2 380 kcal</span>
+          </div>
+          <div class="history-meals">Omelette, Poulet riz, Poisson, Whey</div>
+        </div>
+        <div class="history-item">
+          <div class="history-header">
+            <span class="history-date">11/03</span>
+            <span class="history-total">2 420 kcal</span>
+          </div>
+          <div class="history-meals">Porridge, Boeuf pâtes, Salade thon, Fromage blanc</div>
+        </div>
+        <div class="history-item">
+          <div class="history-header">
+            <span class="history-date">10/03</span>
+            <span class="history-total">2 150 kcal</span>
+          </div>
+          <div class="history-meals">Oeufs, Riz dinde, Soupe, Whey</div>
+        </div>
+        <button class="btn" style="margin-top:8px;">Plus d'historique</button>
+      </div>
+
+      <!-- Catalogue aliments avec scanner -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-utensils"></i> Catalogue aliments</h3>
+          <i class="fas fa-barcode"></i>
+        </div>
+        <div class="catalogue-grid">
+          <div class="catalogue-item"><i class="fas fa-drumstick-bite"></i><span>Poulet</span><span class="small">100g · 165 kcal</span></div>
+          <div class="catalogue-item"><i class="fas fa-fish"></i><span>Saumon</span><span class="small">100g · 208 kcal</span></div>
+          <div class="catalogue-item"><i class="fas fa-egg"></i><span>Oeuf</span><span class="small">1 · 78 kcal</span></div>
+          <div class="catalogue-item"><i class="fas fa-wheat-alt"></i><span>Riz</span><span class="small">100g · 130 kcal</span></div>
+          <div class="catalogue-item"><i class="fas fa-apple-alt"></i><span>Pomme</span><span class="small">1 · 95 kcal</span></div>
+          <div class="catalogue-item"><i class="fas fa-cheese"></i><span>Fromage</span><span class="small">30g · 120 kcal</span></div>
+        </div>
+
+        <!-- Scanner code-barres -->
+        <div class="scanner-area scan-animation">
+          <i class="fas fa-camera scanner-icon"></i>
+          <div class="text-small" style="text-align:center;">Scannez le code-barres d'un produit</div>
+          <button class="scanner-btn"><i class="fas fa-barcode"></i> Lancer le scan</button>
+        </div>
+      </div>
+
+      <!-- Objectifs quotidiens -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-bullseye"></i> Objectifs du jour</h3>
+          <i class="fas fa-chart-pie"></i>
+        </div>
+        <div class="daily-goals">
+          <div class="goal-item"><span class="goal-value">1 820</span><div class="goal-label">/ 2 450 kcal</div></div>
+          <div class="goal-item"><span class="goal-value">128g</span><div class="goal-label">/ 180g Prot</div></div>
+          <div class="goal-item"><span class="goal-value">180g</span><div class="goal-label">/ 240g Gluc</div></div>
+          <div class="goal-item"><span class="goal-value">42g</span><div class="goal-label">/ 70g Lip</div></div>
+        </div>
+        <div class="progress-bar-bg"><div class="progress-fill" style="width:74%"></div></div>
+        <div style="display:flex; justify-content:space-between;">
+          <span class="text-small">Calories consommées</span>
+          <span class="text-small">74%</span>
+        </div>
+      </div>
+
+      <!-- Conseils hydratation (existant mais amélioré) -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-tint"></i> Hydratation</h3>
+          <i class="fas fa-plus-circle"></i>
+        </div>
+        <div style="display:flex; align-items:center; gap:16px;">
+          <span style="font-size:32px; font-family:'Archivo Black';">1.8L</span>
+          <div style="flex:1;">
+            <div class="progress-bar-bg"><div class="progress-fill" style="width:60%"></div></div>
+            <div class="text-small">Objectif 3L</div>
+          </div>
+          <button class="btn" style="width:50px;"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+
+      <div style="height: 20px;"></div>
+    </div>
+
+    <!-- FAB -->
+    <div class="fab" role="button" aria-label="Ajouter un repas"><i class="fas fa-plus"></i></div>
+
+    <!-- Bottom navigation (onglet Nutrition actif) -->
+    <nav class="bottom-nav">
+      <div class="nav-item"><i class="fas fa-chart-pie"></i><span>Dashboard</span></div>
+      <div class="nav-item"><i class="fas fa-calendar-alt"></i><span>Workouts</span></div>
+      <div class="nav-item active"><i class="fas fa-utensils"></i><span>Nutrition</span></div>
+      <div class="nav-item"><i class="fas fa-chart-line"></i><span>Progrès</span></div>
+      <div class="nav-item"><i class="fas fa-exclamation-triangle"></i><span>Cycle</span></div>
+      <div class="nav-item"><i class="fas fa-cog"></i><span>Settings</span></div>
+    </nav>
+  </div>
+
+  <div style="text-align: center; color: #3f4a57; font-size: 11px; padding: 8px; background: #0a0c0e;">threshold · nutrition complète</div>
+
+  <script>
+    (function() {
+      // IMC interactif
+      const tailleInput = document.getElementById('taille');
+      const poidsInput = document.getElementById('poids');
+      const tailleValue = document.getElementById('tailleValue');
+      const poidsValue = document.getElementById('poidsValue');
+      const imcDisplay = document.getElementById('imcDisplay');
+      const imcCategory = document.getElementById('imcCategory');
+
+      function calculerIMC() {
+        const taille = parseFloat(tailleInput.value) / 100;
+        const poids = parseFloat(poidsInput.value);
+        const imc = (poids / (taille * taille)).toFixed(1);
+        imcDisplay.textContent = imc;
+        let category = '';
+        if (imc < 18.5) category = 'Insuffisance pondérale';
+        else if (imc < 25) category = 'Corpulence normale';
+        else if (imc < 30) category = 'Surpoids léger';
+        else if (imc < 35) category = 'Obésité modérée';
+        else category = 'Obésité sévère';
+        imcCategory.textContent = category;
+      }
+
+      tailleInput.addEventListener('input', function() {
+        tailleValue.textContent = this.value;
+        calculerIMC();
+      });
+      poidsInput.addEventListener('input', function() {
+        poidsValue.textContent = this.value;
+        calculerIMC();
+      });
+      calculerIMC();
+
+      // Générateur de plan (simulation)
+      const options = document.querySelectorAll('.plan-option');
+      const mealSuggestion = document.getElementById('mealSuggestion');
+      options.forEach(opt => {
+        opt.addEventListener('click', function(e) {
+          options.forEach(o => o.classList.remove('active'));
+          this.classList.add('active');
+          // Changer le contenu selon l'option
+          if (this.id === 'planMasse') {
+            mealSuggestion.innerHTML = `
+              <div class="meal-title">Petit-déjeuner masse</div>
+              <div class="meal-desc">Flocons d'avoine, lait, whey, beurre de cacahuète, banane</div>
+              <div class="meal-macros"><span><span class="highlight">45P</span> / <span class="highlight">80G</span> / <span class="highlight">20L</span></span><span>~ 680 kcal</span></div>
+            `;
+          } else if (this.id === 'planSeche') {
+            mealSuggestion.innerHTML = `
+              <div class="meal-title">Petit-déjeuner sèche</div>
+              <div class="meal-desc">Oeufs brouillés, blanc de dinde, avocat</div>
+              <div class="meal-macros"><span><span class="highlight">40P</span> / <span class="highlight">10G</span> / <span class="highlight">25L</span></span><span>~ 420 kcal</span></div>
+            `;
+          } else {
+            mealSuggestion.innerHTML = `
+              <div class="meal-title">Petit-déjeuner maintien</div>
+              <div class="meal-desc">Fromage blanc, fruits, granola, amandes</div>
+              <div class="meal-macros"><span><span class="highlight">30P</span> / <span class="highlight">40G</span> / <span class="highlight">15L</span></span><span>~ 420 kcal</span></div>
+            `;
+          }
+        });
+      });
+
+      // Simulation de clic sur le bouton générer (rien de spécial)
+      document.querySelector('.btn-primary')?.addEventListener('click', function(e) {
+        e.preventDefault();
+        // On pourrait juste changer la suggestion, mais déjà fait par les options
+      });
+
+      // Checkbox de la liste de courses (juste pour l'apparence, pas de fonction)
+    })();
+  </script>
+</body>
+</html>

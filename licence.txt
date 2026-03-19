@@ -1,0 +1,414 @@
+# LICENCE LOGICIELLE THRESHOLD
+
+**Version 2.0 – Date d'entrée en vigueur : 19 mars 2026**
+
+**Copyright (c) 2026 erazor-tach – Tous droits réservés.**
+
+La présente licence régit les conditions d'utilisation du logiciel Threshold (ci-après dénommé "le Logiciel"). En installant, copiant, téléchargeant ou utilisant le Logiciel, vous acceptez d'être lié par les termes de cette licence. Si vous n'acceptez pas ces termes, vous n'êtes pas autorisé à utiliser le Logiciel et devez le détruire ou le supprimer immédiatement.
+
+---
+
+## 1. PROPRIÉTÉ INTELLECTUELLE ET DROITS ACCORDÉS
+
+### 1.1. Propriété
+Le Logiciel Threshold, incluant l'intégralité de son code source, sa documentation, ses fichiers de configuration, ses algorithmes de simulation, ses bases de données, ses interfaces graphiques et tout contenu associé, est la propriété exclusive de **erazor-tach**. Il est protégé par les lois nationales et internationales sur la propriété intellectuelle et le droit d'auteur.
+
+### 1.2. Droits accordés
+Sous réserve du respect des présentes conditions, erazor-tach accorde à l'utilisateur ("le Licencié") une licence **personnelle, non exclusive, non transférable, révocable et limitée** pour :
+- Installer et utiliser le Logiciel sur **jusqu'à trois (3) dispositifs simultanément actifs** appartenant au Licencié pour un usage personnel exclusif.
+- Utiliser le Logiciel conformément à sa documentation pour un usage personnel et non commercial, sauf accord écrit contraire.
+
+### 1.3. Restrictions strictes
+Le Licencié s'interdit formellement de :
+- Copier, modifier, adapter, traduire ou créer des œuvres dérivées du Logiciel, en tout ou partie.
+- Procéder à l'ingénierie inverse, au désassemblage, à la décompilation du Logiciel ou tenter d'en extraire le code source.
+- Louer, prêter, distribuer, sous-licencier, céder ou transférer le Logiciel à un tiers.
+- Supprimer ou altérer les mentions de copyright, de marque ou de propriété intellectuelle.
+- Utiliser le Logiciel pour développer un produit concurrent ou pour toute activité illicite.
+
+### 1.4. Interdiction d'usage commercial non autorisé
+
+#### 1.4.1. Principe général
+Toute utilisation du Logiciel dans un cadre professionnel ou commercial, notamment par des coaches sportifs, nutritionnistes, diététiciens, préparateurs physiques, kinésithérapeutes, salles de sport, clubs sportifs, centres de fitness ou tout autre professionnel de la santé, du sport ou du bien-être pour fournir des services payants à des clients, nécessite l'acquisition préalable d'une **licence commerciale distincte** auprès de l'Éditeur.
+
+#### 1.4.2. Tarification des licences commerciales
+Le tarif de la licence commerciale est défini contractuellement selon la nature et l'ampleur de l'usage professionnel envisagé. Les catégories de licences commerciales incluent sans s'y limiter :
+- **Licence Professionnel Solo** : usage par un professionnel indépendant pour un maximum de dix (10) clients actifs simultanément.
+- **Licence Structure Petite** : usage par une structure (salle de sport, cabinet) pour un maximum de cinquante (50) clients actifs simultanément.
+- **Licence Structure Moyenne** : usage par une structure pour un maximum de deux cent cinquante (250) clients actifs simultanément.
+- **Licence Entreprise** : usage sans limitation de nombre de clients, avec support prioritaire et personnalisation possible.
+
+Pour obtenir un devis de licence commerciale, contacter l'Éditeur à l'adresse électronique qui sera communiquée dans la documentation du Logiciel.
+
+#### 1.4.3. Détection et sanctions de l'usage commercial non autorisé
+Le Logiciel intègre des mécanismes techniques de collecte de données d'utilisation anonymisées (voir section 3.5) permettant de détecter des patterns d'utilisation incompatibles avec un usage personnel normal, notamment :
+- Un volume anormalement élevé de générations de plans alimentaires ou de simulations de cycles.
+- Une fréquence d'utilisation suggérant une utilisation pour plusieurs clients distincts.
+- Des modifications répétées de profils utilisateurs incompatibles avec un usage personnel.
+
+Toute détection d'usage commercial non autorisé entraînera :
+- La **résiliation immédiate** de la licence sans préavis ni remboursement.
+- Une **facturation rétroactive** calculée sur la base de **deux cents pour cent (200%)** du tarif de la licence commerciale applicable pour la période d'utilisation frauduleuse constatée, avec un minimum de mille euros (1000 €).
+- Des **poursuites judiciaires** pour violation de propriété intellectuelle et concurrence déloyale.
+- Le **signalement** aux autorités professionnelles compétentes (Ordre des médecins, autorités sanitaires, organismes de certification professionnelle).
+
+Cette clause commerciale s'applique indépendamment de toute autre clause de la présente licence et survive à sa résiliation.
+
+### 1.5. Protection contre la rétro-ingénierie et contournement des protections
+
+#### 1.5.1. Interdiction de contournement des mécanismes de sécurité
+Le Licencié s'interdit formellement toute tentative de contournement, désactivation, modification ou neutralisation des mécanismes de protection technique du Logiciel, notamment :
+- Le système de blocage géographique du module Cycle basé sur la législation locale.
+- Les systèmes de vérification et d'authentification de licence.
+- Les mécanismes de télémétrie et de détection d'usage commercial.
+- Les systèmes de limitation du nombre de dispositifs actifs.
+- Tout autre mécanisme de protection technique intégré au Logiciel.
+
+#### 1.5.2. Interdiction de publication de méthodes de contournement
+Le Licencié s'interdit formellement de publier, partager, distribuer ou communiquer de quelque manière que ce soit, publiquement ou à des tiers, des méthodes, outils, instructions, code source, patches, modifications ou tout autre moyen permettant de contourner les protections techniques du Logiciel.
+
+Cette interdiction s'applique notamment mais non limitativement aux publications sur :
+- Forums publics, sites web, blogs, réseaux sociaux.
+- Plateformes de partage de code source (GitHub, GitLab, SourceForge, etc.).
+- Services de messagerie instantanée, groupes de discussion, serveurs Discord.
+- Tutoriels vidéo, streams en direct, podcasts.
+
+#### 1.5.3. Sanctions du contournement
+Toute violation de cette section constitue une infraction grave entraînant :
+- La résiliation immédiate de la licence.
+- Des poursuites judiciaires pour violation de propriété intellectuelle.
+- La réclamation de dommages et intérêts d'un montant minimal de dix mille euros (10 000 €) par violation constatée, sans préjudice de dommages supérieurs démontrables.
+- Le cas échéant, des poursuites pénales pour atteinte aux systèmes de traitement automatisé de données conformément aux articles 323-1 et suivants du Code pénal français.
+
+---
+
+## 2. EXONÉRATION TOTALE DE RESPONSABILITÉ, BLOCAGE CONDITIONNEL ET CADRE LÉGAL
+
+**EN UTILISANT LE LOGICIEL THRESHOLD, VOUS RECONNAISSEZ ET ACCEPTEZ EXPRESSÉMENT LES TERMES SUIVANTS. À DÉFAUT, VOUS DEVEZ CESSER IMMÉDIATEMENT TOUTE UTILISATION ET DÉSINSTALLER LE LOGICIEL.**
+
+### 2.1. Nature du logiciel : outil de simulation purement théorique
+Le Logiciel Threshold est un **outil de simulation et de visualisation à vocation éducative et expérimentale**. Il propose des cycles et des protocoles **théoriques** basés exclusivement sur des données publiées, des retours d'expérience documentés et des pratiques observées dans le **milieu du bodybuilding et de la musculation amateur et professionnelle à travers le monde**.
+
+**Le Logiciel ne constitue en aucun cas :**
+- Un avis médical, un diagnostic, une prescription ou un traitement.
+- Un conseil personnalisé en nutrition, en entraînement ou en prise de substances.
+- Une recommandation d'usage, d'achat, de vente, de possession ou de distribution de substances interdites ou réglementées.
+
+**Le Logiciel ne crée aucune relation de médecin-patient, de nutritionniste-client, de coach sportif-athlète, ou toute autre relation professionnelle réglementée** entre l'Éditeur et le Licencié.
+
+### 2.2. Absence de garantie et utilisation aux risques et périls du Licencié
+Le Logiciel est fourni **"TEL QUEL"**, sans aucune garantie, expresse ou implicite. L'Éditeur ne garantit pas :
+- L'exactitude, la fiabilité, l'exhaustivité ou l'actualité des simulations.
+- L'adéquation à un usage particulier (fitness, musculation, perte de poids, préparation sportive).
+- L'absence d'erreurs, de bugs, de virus ou de fonctionnement ininterrompu.
+- La légalité de l'utilisation du Logiciel dans le pays du Licencié.
+- La compatibilité avec les dispositifs matériels ou logiciels du Licencié.
+- La disponibilité continue des services en ligne associés au Logiciel.
+
+### 2.3. Obligation de consultation médicale préalable
+**AVANT D'ENTREPRENDRE TOUT PROGRAMME D'ENTRAÎNEMENT, RÉGIME ALIMENTAIRE, OU MODIFICATION DE VOTRE STYLE DE VIE BASÉ SUR LES SIMULATIONS DE THRESHOLD, VOUS DEVEZ OBTENIR L'AVIS D'UN MÉDECIN OU D'UN PROFESSIONNEL DE SANTÉ QUALIFIÉ.** 
+
+Ne jamais ignorer un avis médical professionnel ou tarder à le consulter en raison d'informations obtenues via le Logiciel.
+
+**Le Licencié reconnaît expressément que les simulations fournies par le Logiciel ne peuvent en aucun cas remplacer une consultation médicale individualisée et qu'aucune décision affectant sa santé ne devrait être prise uniquement sur la base des résultats fournis par le Logiciel.**
+
+### 2.4. Responsabilité pénale et légale : obligation de vérification par le Licencié
+
+#### 2.4.1. Obligation générale
+Le Licencié reconnaît que la législation concernant les **stéroïdes anabolisants, les hormones peptidiques, les modulateurs sélectifs des récepteurs aux androgènes (SARMs) et autres substances améliorant la performance** varie considérablement d'un pays à l'autre.
+
+**Il est de la responsabilité exclusive du Licencié de :**
+- Se renseigner sur les lois en vigueur dans son pays de résidence.
+- Se conformer strictement à ces lois.
+- S'abstenir d'utiliser le Logiciel si la législation locale l'interdit.
+
+#### 2.4.2. Cadre légal spécifique de certains pays (sources officielles)
+
+**FRANCE – Interdiction totale avec sanctions pénales**
+- **Article L. 425-9-1 du Code du sport** (créé par LOI n°2024-364 du 22 avril 2024) :
+  > *"I. - La détention, sans raison médicale dûment justifiée, d'une ou plusieurs substances ou méthodes interdites par la liste mentionnée à l'article L. 425-9 est punie d'un an d'emprisonnement et de 3 750 € d'amende. II. - L'usage, sans raison médicale dûment justifiée, de l'une de ces substances ou méthodes est puni d'un an d'emprisonnement et de 3 750 € d'amende."*
+- **Arrêté du 11 août 2025** fixant la liste des substances interdites (JORF n°0189 du 15 août 2025) : inclut l'ensemble des stéroïdes anabolisants androgènes (SAA), SARMs, hormones de croissance, etc.
+- **Article L. 5432-2 du Code de la santé publique** : exercice illégal de la médecine (2 ans d'emprisonnement et 30 000 € d'amende).
+
+**ROYAUME-UNI – Substances contrôlées (Class C)**
+- **Misuse of Drugs Act 1971** : les stéroïdes anabolisants sont classés comme substances de Catégorie C.
+- **Government response to ACMD reports, 23 February 2026** (disponible sur gov.uk) : confirmation du contrôle de nouvelles substances comme somapacitan, somatrogon, etc., en tant que Class C drugs.
+- La possession sans prescription médicale est illégale et passible de poursuites.
+
+**MEXIQUE – Situation ambiguë (usage non régulé mais vente réglementée)**
+- Proposition de réforme de l'Universidad Veracruzana (31 mai 2018) concernant l'article 181 de la Ley General de Salud : le Congrès a été saisi pour clarifier le statut des stéroïdes, mais à ce jour, l'usage personnel existe dans un vide juridique relatif. La vente sans prescription médicale reste illégale.
+- Source : Université Veracruzana, proposition officielle.
+
+**THAÏLANDE, INDE, TURQUIE** – Le Licencié résidant dans ces pays est tenu de consulter les autorités locales et de s'abstenir d'utiliser le Logiciel en cas de doute sur la légalité.
+
+### 2.5. Blocage conditionnel d'accès au module "Cycle"
+
+#### 2.5.1. Principe
+L'accès au module "Cycle" du Logiciel (ci-après "le Module") est **conditionné à la législation en vigueur dans le pays de résidence du Licencié**.
+
+#### 2.5.2. Déclaration obligatoire et engagement sur l'honneur
+Lors de la première tentative d'accès au Module, le Licencié devra :
+1. Sélectionner son pays de résidence dans une liste.
+2. Lire et accepter une déclaration dont le texte est reproduit ci-dessous et qui sera conservée dans les journaux (logs) du Logiciel à des fins de preuve :
+
+> *"Je déclare sur l'honneur avoir vérifié la législation de mon pays concernant les substances simulées par Threshold. Je certifie que mon utilisation du Module 'Cycle' est légale dans mon pays de résidence. J'accepte l'entière responsabilité civile et pénale de mon utilisation. Je dégage expressément l'Éditeur de toute responsabilité en cas de non-respect des lois locales."*
+
+#### 2.5.3. Blocage effectif
+- **Pays à législation restrictive (exemples : France, Royaume-Uni, États-Unis, Canada, Australie)** : Le Logiciel bloquera techniquement l'accès au Module, avec un message explicite rappelant l'interdiction légale et les sanctions encourues. Aucune déclaration ne pourra lever ce blocage.
+- **Pays à législation ambiguë ou non vérifiée (exemples : Mexique, Thaïlande, Inde, Turquie)** : Le Logiciel exigera la déclaration sur l'honneur ci-dessus avant d'autoriser l'accès, et conservera une trace horodatée et cryptographiquement signée de cette acceptation.
+- **Autres pays** : Le Licencié est seul juge de la légalité ; l'Éditeur ne fournit aucune garantie et se décharge de toute responsabilité.
+
+### 2.6. Absence totale d'incitation et mise en garde contre les pratiques illégales
+
+#### 2.6.1. Position de l'Éditeur
+L'Éditeur **ne promeut, n'encourage, ne recommande et n'incite en aucune manière** à :
+- L'achat, la vente, la possession, l'importation, l'exportation de substances réglementées.
+- L'usage de substances sans avis médical.
+- La pratique de cycles sans suivi médical.
+- La dissimulation d'usage de substances lors de compétitions sportives (dopage).
+
+Le Logiciel est un outil de **simulation mathématique** qui calcule des courbes théoriques basées sur des données publiées. Ces simulations ne constituent **pas des recommandations**.
+
+#### 2.6.2. Mise en garde spécifique contre les "coachs" et prescripteurs illégaux
+**ATTENTION : DANS LA PLUPART DES PAYS, SEULS LES MÉDECINS SONT HABILITÉS À PRESCRIRE DES MÉDICAMENTS.**
+
+Le Logiciel attire expressément l'attention du Licencié sur les risques suivants :
+- **Exercice illégal de la médecine** : Toute personne non titulaire d'un diplôme de médecin qui prescrit, conseille ou recommande l'usage de substances réglementées commet un délit (en France, article L. 4161-1 du Code de la santé publique, passible de deux ans d'emprisonnement et 30 000 euros d'amende).
+- **Responsabilité pénale du "coach"** : Les instructeurs sportifs, coachs personnels, ou préparateurs physiques qui recommandent des cycles à leurs clients s'exposent à des poursuites pénales et à des peines d'emprisonnement.
+- **Responsabilité civile** : En cas de dommage corporel subi par une personne ayant suivi les conseils d'un non-médecin, le prescripteur illégal peut être poursuivi pour blessures involontaires et condamné à verser des dommages et intérêts substantiels, potentiellement supérieurs à plusieurs centaines de milliers d'euros.
+
+**Le Logiciel THRESHOLD n'a pas pour objet de fournir des conseils médicaux et ne saurait être utilisé comme tel par des personnes non habilitées.**
+
+#### 2.6.3. Clause anti-contournement
+Le Licencié s'interdit formellement de :
+- Présenter les simulations du Logiciel comme des "recommandations" ou des "prescriptions".
+- Utiliser le Logiciel dans le cadre d'une activité professionnelle de conseil sans disposer des qualifications médicales légales requises.
+- Facturer des prestations de conseil basées sur les simulations du Logiciel sans licence commerciale appropriée.
+- Imprimer, exporter ou capturer les résultats du Logiciel pour les distribuer à des tiers dans un cadre commercial.
+
+Tout manquement à cette clause entraîne :
+- La résiliation immédiate de la licence sans préavis.
+- Des poursuites judiciaires pour violation des conditions d'utilisation et exercice illégal de la médecine.
+- Le signalement aux autorités compétentes (Ordre des médecins, Agence Régionale de Santé, autorités sanitaires nationales).
+- Des poursuites pénales le cas échéant pour mise en danger de la vie d'autrui.
+
+### 2.7. Exclusion totale des dommages
+**En aucun cas, l'Éditeur (erazor-tach) ne pourra être tenu responsable de :**
+- **Tout dommage corporel** (blessures, accidents, malaises, décès) résultant de l'utilisation du Logiciel ou de la mise en pratique des simulations.
+- **Tout dommage matériel ou immatériel**, direct ou indirect, perte de profits, perte de données, interruption d'activité.
+- **Toute poursuite pénale ou civile** engagée contre le Licencié pour non-respect des lois de son pays.
+- **Toute action en justice** intentée contre le Licencié pour exercice illégal de la médecine ou infraction à la législation sur les stupéfiants.
+- **Tout dysfonctionnement technique** du Logiciel causant une perte de données ou une indisponibilité.
+- **Toute incompatibilité** avec le matériel ou les logiciels du Licencié.
+
+### 2.8. Indemnisation
+Le Licencié accepte expressément de **garantir et indemniser** l'Éditeur contre toute perte, responsabilité, dommage, ou frais (incluant les honoraires raisonnables d'avocats) découlant de ou liés à :
+- Son utilisation du Logiciel.
+- Sa violation des présentes conditions.
+- Sa négligence.
+- Toute action en justice intentée contre l'Éditeur en raison de l'utilisation du Logiciel par le Licencié.
+
+**Toutefois, cette indemnisation ne pourra excéder le montant total payé par le Licencié pour l'acquisition du Logiciel au cours des douze (12) mois précédant la réclamation, avec un minimum de mille euros (1 000 €) en cas de licence gratuite.**
+
+**Cette clause d'indemnisation survit à la résiliation de la présente licence.**
+
+### 2.9. Interactions médicamenteuses et contre-indications médicales
+
+#### 2.9.1. Absence de vérification des interactions
+Le Licencié reconnaît et accepte expressément que le Logiciel **ne vérifie pas et ne peut pas vérifier** les interactions potentiellement dangereuses entre les substances simulées et :
+- D'autres médicaments prescrits ou en vente libre que le Licencié pourrait prendre.
+- Des suppléments nutritionnels, plantes médicinales ou substances naturelles.
+- L'alcool, le tabac ou d'autres substances psychoactives.
+
+#### 2.9.2. Absence de prise en compte des conditions médicales
+Le Logiciel ne prend pas en compte et ne peut pas prendre en compte :
+- Les conditions médicales préexistantes du Licencié (maladies cardiovasculaires, diabète, troubles hépatiques ou rénaux, troubles psychiatriques, etc.).
+- Les allergies ou intolérances spécifiques du Licencié.
+- Les contre-indications individuelles basées sur l'historique médical personnel.
+- Les facteurs génétiques influençant le métabolisme des substances.
+- L'état de santé actuel du Licencié au moment de l'utilisation du Logiciel.
+
+#### 2.9.3. Responsabilité exclusive du médecin
+Le Licencié reconnaît que **seul un médecin disposant d'un accès complet à son dossier médical, de ses antécédents familiaux, de ses résultats d'analyses biologiques et d'examens cliniques** peut évaluer de manière appropriée :
+- Les risques associés à l'utilisation de substances améliorant la performance.
+- Les interactions médicamenteuses potentiellement mortelles.
+- Les contre-indications absolues ou relatives.
+- Le suivi médical nécessaire en cas d'utilisation de ces substances.
+
+**Toute décision d'utiliser des substances basée uniquement ou partiellement sur les simulations du Logiciel, sans consultation médicale appropriée, relève de la responsabilité exclusive du Licencié.**
+
+---
+
+## 3. DURÉE, RÉSILIATION ET MISES À JOUR
+
+### 3.1. Durée
+La présente licence est effective à compter de la première utilisation du Logiciel par le Licencié et reste en vigueur jusqu'à sa résiliation conformément aux présentes conditions.
+
+### 3.2. Résiliation par le Licencié
+Le Licencié peut résilier cette licence à tout moment en cessant toute utilisation du Logiciel et en détruisant toutes les copies en sa possession ou sous son contrôle.
+
+### 3.3. Résiliation par l'Éditeur
+L'Éditeur peut résilier immédiatement cette licence, sans préavis ni mise en demeure préalable, en cas de :
+- Non-respect par le Licencié de l'une quelconque des dispositions des présentes.
+- Usage commercial non autorisé détecté.
+- Tentative de contournement des mécanismes de protection technique.
+- Modification législative rendant l'utilisation du Logiciel illégale dans la juridiction du Licencié.
+- Décision unilatérale de l'Éditeur, pour quelque raison que ce soit, moyennant un préavis de trente (30) jours.
+
+### 3.4. Effets de la résiliation
+En cas de résiliation, le Licencié doit immédiatement :
+- Cesser toute utilisation du Logiciel.
+- Détruire toutes les copies du Logiciel en sa possession, sur tous les dispositifs.
+- Supprimer toutes les données exportées ou sauvegardées à partir du Logiciel.
+- Sur demande de l'Éditeur, fournir une attestation écrite de destruction complète.
+
+Les clauses suivantes survivent à la résiliation de la licence : 1.1 (Propriété), 1.4.3 (Sanctions usage commercial), 1.5.3 (Sanctions contournement), 2.7 (Exclusion dommages), 2.8 (Indemnisation), 4 (Droit applicable).
+
+### 3.5. Collecte de données d'utilisation et télémétrie
+
+#### 3.5.1. Données collectées
+Le Logiciel peut collecter et transmettre à l'Éditeur des données techniques anonymisées concernant :
+- L'utilisation des fonctionnalités (fréquence, durée, modules utilisés).
+- Les performances du système (temps de réponse, erreurs rencontrées, plantages).
+- Les statistiques d'utilisation globales (nombre de générations de plans, nombre de simulations).
+- Les informations système (version du système d'exploitation, type de dispositif, résolution d'écran).
+- L'identifiant unique anonyme du dispositif (UUID généré aléatoirement, non lié à une identité personnelle).
+
+#### 3.5.2. Données explicitement exclues
+Le Logiciel **ne collecte en aucun cas** :
+- Les informations médicales personnelles du Licencié (poids, taille, objectifs, pathologies).
+- Le contenu des plans alimentaires ou des simulations de cycles générés.
+- Les notes personnelles, commentaires ou journaux saisis par le Licencié.
+- L'adresse IP, l'adresse électronique ou toute donnée permettant l'identification directe du Licencié.
+
+#### 3.5.3. Finalités de la collecte
+Les données collectées sont utilisées exclusivement pour :
+- Améliorer la qualité, la stabilité et les performances du Logiciel.
+- Identifier et corriger les bugs et dysfonctionnements.
+- Développer de nouvelles fonctionnalités répondant aux besoins des utilisateurs.
+- Détecter les usages commerciaux non autorisés (voir section 1.4.3).
+
+#### 3.5.4. Conformité RGPD
+La collecte de données est effectuée dans le strict respect du Règlement Général sur la Protection des Données (RGPD) de l'Union Européenne. Le Licencié dispose d'un droit d'accès, de rectification et de suppression de ses données conformément aux articles 15, 16 et 17 du RGPD. Pour exercer ces droits, contacter l'Éditeur à l'adresse électronique communiquée dans la documentation du Logiciel.
+
+#### 3.5.5. Désactivation de la télémétrie
+Le Licencié peut désactiver la télémétrie dans les paramètres du Logiciel. Toutefois, cette désactivation peut entraîner une limitation de certaines fonctionnalités nécessitant une connexion aux serveurs de l'Éditeur et empêche l'Éditeur de fournir un support technique personnalisé en cas de dysfonctionnement.
+
+### 3.6. Mises à jour et maintenance
+
+#### 3.6.1. Absence d'obligation
+L'Éditeur n'a aucune obligation de fournir des mises à jour, corrections de bugs, améliorations fonctionnelles, support technique ou services de maintenance, sauf accord écrit contraire (licence commerciale avec support inclus).
+
+#### 3.6.2. Mises à jour facultatives
+Les mises à jour éventuellement fournies le sont à la discrétion exclusive de l'Éditeur, sans garantie de fréquence, de délai ou de contenu. L'Éditeur se réserve le droit de :
+- Modifier les fonctionnalités existantes.
+- Supprimer des fonctionnalités devenues obsolètes ou problématiques.
+- Ajouter de nouvelles fonctionnalités.
+- Modifier l'interface utilisateur.
+
+#### 3.6.3. Modification des termes de la licence
+Les mises à jour peuvent s'accompagner de modifications des termes de la présente licence. Dans ce cas :
+- Le Licencié sera notifié des modifications par un message dans le Logiciel ou par courrier électronique si une adresse a été fournie.
+- Le Licencié devra accepter les nouveaux termes pour continuer à utiliser le Logiciel.
+- En cas de refus des nouveaux termes, la licence sera automatiquement résiliée et le Licencié devra cesser toute utilisation du Logiciel.
+
+#### 3.6.4. Désactivation à distance de fonctionnalités
+L'Éditeur se réserve le droit de désactiver à distance, sans préavis, certaines fonctionnalités du Logiciel ou d'en restreindre l'accès dans les cas suivants :
+- Modification législative rendant leur utilisation illégale dans la juridiction du Licencié.
+- Découverte d'une vulnérabilité de sécurité critique nécessitant une correction immédiate.
+- Décision judiciaire ou administrative ordonnant la désactivation.
+- Non-paiement de la licence commerciale le cas échéant.
+
+Cette désactivation n'entraîne aucune compensation financière ni droit à remboursement, même partiel.
+
+---
+
+## 4. DROIT APPLICABLE ET JURIDICTION
+
+### 4.1. Droit applicable
+La présente Licence est régie par le **droit français**, à l'exclusion de ses règles de conflits de lois et de la Convention de Vienne sur la vente internationale de marchandises.
+
+### 4.2. Juridiction compétente pour les Licenciés résidant en France
+Tout litige relatif à l'interprétation, la validité ou l'exécution de la présente Licence relève de la compétence exclusive des tribunaux de **Évreux / Val-de-Reuil, France**, sous réserve des règles de procédure applicables.
+
+### 4.3. Juridiction alternative pour les Licenciés internationaux
+Pour les Licenciés résidant hors de l'Union Européenne, l'Éditeur se réserve le droit, à sa seule discrétion, d'accepter **l'arbitrage international selon le Règlement d'arbitrage de la Chambre de Commerce Internationale (CCI) de Paris** comme mode alternatif de résolution des litiges.
+
+Dans ce cas :
+- L'arbitrage se déroulera à Paris, France.
+- La langue de l'arbitrage sera le français ou l'anglais, au choix de l'Éditeur.
+- La sentence arbitrale sera définitive et obligatoire pour les deux parties.
+- Les frais d'arbitrage seront répartis conformément au Règlement de la CCI.
+
+Cette option d'arbitrage ne constitue pas une renonciation de l'Éditeur à son droit de saisir les tribunaux compétents mentionnés à la section 4.2.
+
+### 4.4. Renonciation à l'action collective
+Dans la mesure permise par la loi applicable, le Licencié renonce expressément à son droit de participer à une action collective (class action) contre l'Éditeur et accepte que tout litige soit résolu individuellement.
+
+---
+
+## 5. DISPOSITIONS GÉNÉRALES
+
+### 5.1. Intégralité de l'accord
+La présente Licence constitue l'intégralité de l'accord entre l'Éditeur et le Licencié concernant l'utilisation du Logiciel et remplace tous les accords antérieurs, écrits ou oraux, relatifs au même objet.
+
+### 5.2. Modification de la Licence
+L'Éditeur se réserve le droit de modifier les termes de la présente Licence à tout moment. Les modifications entreront en vigueur à la date indiquée dans la version modifiée. L'utilisation continue du Logiciel après l'entrée en vigueur des modifications constitue l'acceptation des nouveaux termes.
+
+### 5.3. Renonciation
+Le fait pour l'Éditeur de ne pas exercer ou de retarder l'exercice d'un droit ou d'un recours prévu par la présente Licence ne constitue pas une renonciation à ce droit ou recours, ni n'empêche l'exercice ultérieur de ce droit ou recours.
+
+### 5.4. Notifications
+Toutes les notifications requises ou autorisées en vertu de la présente Licence seront effectuées par écrit et seront considérées comme dûment remises si :
+- Remises en mains propres.
+- Envoyées par courrier électronique à l'adresse fournie par le Licencié lors de l'installation (le cas échéant).
+- Envoyées par courrier recommandé avec accusé de réception.
+- Affichées dans le Logiciel lors du lancement.
+
+### 5.5. Cession
+Le Licencié ne peut céder, transférer ou sous-licencier ses droits ou obligations en vertu de la présente Licence sans le consentement écrit préalable de l'Éditeur. L'Éditeur peut librement céder cette Licence à tout tiers, notamment en cas de cession d'entreprise, de fusion ou d'acquisition.
+
+### 5.6. Séparabilité des clauses
+Si l'une quelconque des clauses de la présente Licence est jugée invalide, illégale ou inapplicable par un tribunal compétent, dans toute juridiction :
+- Cette invalidité n'affectera pas la validité et l'applicabilité des autres clauses qui resteront pleinement en vigueur.
+- La clause invalide sera réputée modifiée dans la mesure minimale nécessaire pour la rendre valide et applicable tout en préservant au maximum l'intention initiale des parties.
+- Si une telle modification n'est pas possible, la clause invalide sera réputée supprimée sans affecter le reste de la Licence.
+
+### 5.7. Interprétation
+Les titres et sous-titres des sections de la présente Licence sont fournis uniquement pour faciliter la lecture et n'ont aucune valeur juridique dans l'interprétation des clauses.
+
+En cas de contradiction entre une version traduite de cette Licence et la version française, **la version française prévaudra**.
+
+### 5.8. Licence de recherche scientifique
+L'Éditeur peut, à sa seule discrétion et sur demande écrite motivée, accorder une **Licence Recherche** à des chercheurs universitaires, professionnels de santé ou organismes de recherche reconnus, justifiant d'un usage légitime du Logiciel dans un cadre scientifique, médical ou éducatif strictement encadré.
+
+Cette Licence Recherche peut permettre un accès au module Cycle même dans les pays à législation restrictive, sous réserve de conditions spécifiques incluant notamment :
+- Présentation d'un protocole de recherche validé par un comité d'éthique.
+- Engagement de non-utilisation sur des sujets humains sans autorisation préalable des autorités sanitaires compétentes.
+- Publication des résultats dans des revues scientifiques à comité de lecture.
+- Mention de Threshold dans les publications scientifiques résultant de l'utilisation du Logiciel.
+
+Les termes de la Licence Recherche font l'objet d'un contrat distinct et spécifique négocié au cas par cas avec l'Éditeur.
+
+---
+
+## 6. ACCEPTATION FINALE
+
+**En utilisant Threshold, vous reconnaissez avoir lu, compris et accepté l'intégralité des termes de cette licence, et notamment :**
+- Les clauses d'exonération de responsabilité (section 2).
+- Les clauses de blocage conditionnel du module Cycle (section 2.5).
+- Les interdictions d'usage commercial non autorisé (section 1.4).
+- Les interdictions de contournement des protections techniques (section 1.5).
+- Les clauses d'indemnisation (section 2.8).
+- Les clauses de collecte de données (section 3.5).
+- Les clauses de juridiction et de droit applicable (section 4).
+
+**Si vous n'acceptez pas ces termes, vous n'êtes pas autorisé à utiliser le Logiciel et devez le désinstaller immédiatement.**
+
+---
+
+**Pour toute question concernant cette Licence, veuillez contacter l'Éditeur à l'adresse qui sera communiquée dans la documentation du Logiciel.**
+
+**Threshold – Licence Propriétaire.**  
+**Copyright (c) 2026 erazor-tach – Tous droits réservés.**  
+**Date de dernière mise à jour : 19 mars 2026**

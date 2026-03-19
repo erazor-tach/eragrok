@@ -1,0 +1,6 @@
+set(SOURCES
+    src/threshold_types.cpp
+    src/db_wrapper.cpp
+    src/meal_engine.cpp
+    src/utils.cpp
+)

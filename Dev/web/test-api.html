@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THRESHOLD - Test API Backend C++</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0c0e;
+      color: #e8eef2;
+      padding: 40px;
+      line-height: 1.6;
+    }
+    .container { max-width: 800px; margin: 0 auto; }
+    h1 {
+      color: #ff8c42;
+      margin-bottom: 10px;
+      font-size: 32px;
+    }
+    .subtitle {
+      color: #8e9fb1;
+      margin-bottom: 30px;
+      font-size: 16px;
+    }
+    .result {
+      background: #1a1e26;
+      border-radius: 16px;
+      padding: 20px;
+      margin: 20px 0;
+      border: 1px solid #2e353f;
+    }
+    .result h2 {
+      color: #ff8c42;
+      font-size: 18px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .stat {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #2e353f;
+    }
+    .stat:last-child { border-bottom: none; }
+    .stat-label { 
+      color: #8e9fb1;
+      font-size: 14px;
+    }
+    .stat-value {
+      color: #ff8c42;
+      font-weight: 700;
+      font-size: 24px;
+    }
+    button {
+      background: linear-gradient(135deg, #ff8c42 0%, #e0662a 100%);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 140, 66, 0.3);
+    }
+    button:active {
+      transform: translateY(0);
+    }
+    .loading {
+      color: #ff8c42;
+      font-style: italic;
+    }
+    .error {
+      color: #ff4444;
+      background: rgba(255, 68, 68, 0.1);
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ff4444;
+    }
+    .success-badge {
+      display: inline-block;
+      background: rgba(76, 175, 80, 0.2);
+      color: #4caf50;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔥 THRESHOLD Backend Test</h1>
+    <p class="subtitle">Test de connexion C++ via Apache CGI</p>
+
+    <button onclick="testAPI()">🚀 Lancer Test API</button>
+
+    <div id="results"></div>
+  </div>
+
+  <script>
+    const API_BASE = 'http://localhost/cgi-bin/threshold.cgi';
+
+    async function testAPI() {
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = '<div class="result"><p class="loading">⏳ Appel backend C++...</p></div>';
+
+      try {
+        // Test avec profil Erazor
+        const url = `${API_BASE}?action=tdee&age=30&poids=85&taille=180&sexe=homme&activite=actif`;
+        
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.error) {
+          resultsDiv.innerHTML = `
+            <div class="result">
+              <div class="error">❌ Erreur: ${data.error}</div>
+            </div>
+          `;
+          return;
+        }
+
+        // Afficher les résultats
+        resultsDiv.innerHTML = `
+          <div class="result">
+            <h2>✅ Backend C++ Connecté <span class="success-badge">LIVE</span></h2>
+            <div class="stat">
+              <span class="stat-label">TDEE (Dépense journalière)</span>
+              <span class="stat-value">${Math.round(data.tdee)} kcal</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Calories totales</span>
+              <span class="stat-value">${Math.round(data.calories)} kcal</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Protéines</span>
+              <span class="stat-value">${Math.round(data.proteines)}g</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Glucides</span>
+              <span class="stat-value">${Math.round(data.glucides)}g</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Lipides</span>
+              <span class="stat-value">${Math.round(data.lipides)}g</span>
+            </div>
+          </div>
+
+          <div class="result">
+            <h2>📊 Données brutes JSON</h2>
+            <pre style="background: #0f131a; padding: 12px; border-radius: 8px; overflow-x: auto; font-size: 12px; color: #8e9fb1;">${JSON.stringify(data, null, 2)}</pre>
+          </div>
+        `;
+
+      } catch (error) {
+        resultsDiv.innerHTML = `
+          <div class="result">
+            <div class="error">❌ Erreur de connexion: ${error.message}</div>
+            <p style="margin-top: 12px; color: #8e9fb1; font-size: 14px;">
+              Vérifiez qu'Apache tourne : <code>sudo systemctl status apache2</code>
+            </p>
+          </div>
+        `;
+      }
+    }
+  </script>
+</body>
+</html>

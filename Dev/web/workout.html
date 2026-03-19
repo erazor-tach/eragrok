@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Threshold · Workouts complet</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts : Inter + Archivo Black -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Archivo+Black&display=swap" rel="stylesheet">
+  <style>
+    /* RESET & base mobile-first */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0a0c0e;
+      color: #e8eef2;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-size: 15px;
+    }
+
+    .app {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      max-width: 480px;
+      width: 100%;
+      margin: 0 auto;
+      background-color: #0f1115;
+      box-shadow: 0 0 0 1px #2a2e33;
+      border-radius: 28px 28px 0 0;
+      overflow: hidden;
+      position: relative;
+      padding-bottom: 80px;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .card, .session-card, .wellness-item, .timeline-item, .workout-card, .catalogue-item, .technique-card, .history-item, .badge-card {
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 #ff8c4280; }
+      70% { box-shadow: 0 0 0 10px #ff8c4200; }
+      100% { box-shadow: 0 0 0 0 #ff8c4200; }
+    }
+    .pulse {
+      animation: pulse 1.5s infinite;
+    }
+
+    /* HEADER */
+    .mobile-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      background: #13171c;
+      border-bottom: 1px solid #2c323a;
+    }
+
+    .menu-icon {
+      font-size: 24px;
+      color: #ff9f5c;
+      background: none;
+      border: none;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: default;
+      transition: opacity 0.15s;
+    }
+    .menu-icon:active { opacity: 0.6; }
+
+    .logo-mobile {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .logo-mobile i {
+      font-size: 24px;
+      color: #ff8c42;
+      filter: drop-shadow(0 0 4px #ff8c4280);
+    }
+
+    .logo-mobile span {
+      font-weight: 700;
+      font-size: 18px;
+      background: linear-gradient(135deg, #ffb88c, #ff8c42);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 0.5px;
+    }
+
+    .profile-icon-mobile {
+      width: 40px;
+      height: 40px;
+      background: #262e38;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #ffbc8c;
+      border: 1px solid #404b58;
+      font-size: 15px;
+      cursor: default;
+      transition: 0.15s;
+    }
+    .profile-icon-mobile:active { background: #323e4c; }
+
+    /* MAIN CONTENT */
+    .main-content {
+      flex: 1;
+      padding: 20px 16px 24px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .welcome-block {
+      margin-bottom: 4px;
+    }
+
+    .welcome-block h2 {
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .welcome-block .highlight {
+      color: #ffa55c;
+    }
+
+    .welcome-block p {
+      color: #8e9fb1;
+      font-size: 12px;
+    }
+
+    .search-mobile {
+      background-color: #1e232b;
+      border-radius: 40px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid #323c48;
+      margin: 8px 0 4px;
+      transition: border-color 0.15s;
+    }
+    .search-mobile:focus-within { border-color: #ff8c42; }
+
+    .search-mobile i {
+      color: #ff9f5c;
+      font-size: 14px;
+    }
+
+    .search-mobile input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #f0f6fc;
+      font-size: 13px;
+      width: 100%;
+    }
+
+    .search-mobile input::placeholder {
+      color: #6a7e96;
+    }
+
+    /* Style générique des cartes */
+    .card {
+      background: #1a1e26;
+      border-radius: 28px;
+      padding: 20px;
+      border: 1px solid #2e353f;
+      box-shadow: 0 6px 14px #00000080;
+      width: 100%;
+      transition: transform 0.1s, border-color 0.2s;
+    }
+    .card:active { transform: scale(0.99); }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .card-header h3 {
+      font-weight: 600;
+      font-size: 16px;
+      color: #e8eef2;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-header i {
+      color: #ff8c42;
+      font-size: 18px;
+    }
+
+    /* Calendrier semaine */
+    .week-calendar {
+      display: flex;
+      justify-content: space-between;
+      margin: 16px 0;
+    }
+    .day {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #0f131a;
+      border-radius: 20px;
+      padding: 10px 0;
+      width: 42px;
+      color: #b1c2d6;
+    }
+    .day.active {
+      background: #ff8c42;
+      color: #0f1217;
+      font-weight: 700;
+    }
+    .day .day-name {
+      font-size: 12px;
+    }
+    .day .day-number {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    /* Liste d'exercices */
+    .exercise-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #2b323c;
+    }
+    .exercise-item:last-child { border-bottom: none; }
+    .exercise-name {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+    }
+    .exercise-stats {
+      background: #262d37;
+      padding: 5px 12px;
+      border-radius: 40px;
+      font-size: 12px;
+      color: #cbd8e8;
+    }
+    .exercise-done {
+      color: #8bc34a;
+      margin-left: 8px;
+    }
+
+    /* Chronomètre & compteur */
+    .chrono-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #0f131a;
+      border-radius: 40px;
+      padding: 8px 16px;
+      margin-top: 8px;
+    }
+    .chrono-display {
+      font-size: 24px;
+      font-weight: 700;
+      font-family: 'Archivo Black', sans-serif;
+      color: #ffbc8c;
+      letter-spacing: 2px;
+    }
+    .chrono-controls {
+      display: flex;
+      gap: 12px;
+    }
+    .chrono-btn {
+      background: #262e38;
+      border: none;
+      color: #ffbc8c;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: default;
+      transition: 0.1s;
+    }
+    .chrono-btn:active {
+      background: #3a4555;
+      transform: scale(0.9);
+    }
+
+    .set-counter {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #0f131a;
+      border-radius: 40px;
+      padding: 8px 16px;
+    }
+    .counter-display {
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffbc8c;
+    }
+    .counter-controls {
+      display: flex;
+      gap: 16px;
+    }
+    .counter-btn {
+      background: #262e38;
+      border: none;
+      color: #ffbc8c;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: default;
+      transition: 0.1s;
+    }
+    .counter-btn:active {
+      background: #3a4555;
+      transform: scale(0.9);
+    }
+
+    .btn {
+      flex: 1;
+      background: #2e3743;
+      border: none;
+      color: #eef3f8;
+      padding: 14px 0;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 14px;
+      border: 1px solid #475460;
+      text-align: center;
+      cursor: default;
+      transition: background 0.1s, transform 0.1s;
+    }
+    .btn:active {
+      background: #3e4a5a;
+      transform: scale(0.97);
+    }
+    .btn-primary {
+      background: linear-gradient(145deg, #ff8c42, #e0662a);
+      border: 1px solid #ffa766;
+      color: #0f1217;
+      font-weight: 700;
+    }
+    .btn-primary:active {
+      background: linear-gradient(145deg, #e0662a, #c04e1a);
+    }
+
+    /* Badge */
+    .badge {
+      background: #3a2c1c;
+      color: #ff8c42;
+      border: 1px solid #ff8c42;
+      border-radius: 40px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Stats volumes */
+    .volume-stats {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .volume-item {
+      background: #0f131a;
+      border-radius: 20px;
+      padding: 12px;
+      flex: 1;
+      text-align: center;
+    }
+    .volume-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffbc8c;
+    }
+    .volume-label {
+      font-size: 11px;
+      color: #8a9bb0;
+    }
+
+    /* Prochains workouts */
+    .next-workout {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #0f131a;
+      border-radius: 20px;
+      padding: 12px;
+      margin-bottom: 8px;
+    }
+    .next-workout-icon {
+      width: 40px;
+      height: 40px;
+      background: #2a333f;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ff8c42;
+    }
+    .next-workout-details {
+      flex: 1;
+    }
+    .next-workout-title {
+      font-weight: 600;
+    }
+    .next-workout-time {
+      font-size: 11px;
+      color: #a0b2c9;
+    }
+
+    /* Catalogue d'exercices */
+    .catalogue-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .catalogue-item {
+      background: #0f131a;
+      border-radius: 20px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .catalogue-item i {
+      font-size: 28px;
+      color: #ff8c42;
+    }
+    .catalogue-item span {
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .catalogue-item .small {
+      font-size: 10px;
+      color: #a0b2c9;
+    }
+
+    /* Techniques */
+    .technique-card {
+      background: #0f131a;
+      border-radius: 20px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .technique-title {
+      font-weight: 600;
+      color: #ffbc8c;
+      margin-bottom: 4px;
+    }
+    .technique-desc {
+      font-size: 12px;
+      color: #b1c2d6;
+    }
+    .technique-video {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      color: #ff8c42;
+    }
+
+    /* Historique */
+    .history-item {
+      background: #0f131a;
+      border-radius: 20px;
+      padding: 12px;
+      margin-bottom: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .history-header {
+      display: flex;
+      justify-content: space-between;
+    }
+    .history-date {
+      color: #ffbc8c;
+      font-weight: 600;
+    }
+    .history-score {
+      background: #2d3a2d;
+      color: #8bc34a;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-size: 11px;
+    }
+    .history-exos {
+      font-size: 12px;
+      color: #a0b2c9;
+    }
+    .history-volume {
+      font-size: 12px;
+      display: flex;
+      gap: 16px;
+    }
+
+    /* Progression par exercice */
+    .progress-graph {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 80px;
+      margin: 16px 0;
+    }
+    .graph-bar {
+      flex: 1;
+      background: #2f3947;
+      height: 100%;
+      border-radius: 8px;
+      position: relative;
+    }
+    .graph-bar::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: var(--h);
+      background: #ff8c42;
+      border-radius: 8px;
+    }
+
+    /* Badges collection */
+    .badge-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .badge-card {
+      background: #1b1f27;
+      border-radius: 30px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid #313944;
+    }
+
+    .text-small { font-size: 11px; color: #8699b0; }
+    .highlight { color: #ffad70; }
+    hr { border: 0.5px solid #2f3742; margin: 16px 0; }
+
+    /* Bottom navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #13171e;
+      border-top: 1px solid #2c343e;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 6px 4px 10px;
+      max-width: 480px;
+      margin: 0 auto;
+      right: 0;
+      border-radius: 28px 28px 0 0;
+      box-shadow: 0 -4px 12px #00000080;
+      z-index: 10;
+    }
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      color: #8a9bb0;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: default;
+      padding: 4px 6px;
+      border-radius: 40px;
+      position: relative;
+      transition: color 0.15s;
+    }
+    .nav-item:active { opacity: 0.7; }
+    .nav-item i { font-size: 22px; color: #8a9bb0; }
+    .nav-item.active { color: #ff9f5c; }
+    .nav-item.active i { color: #ff9f5c; text-shadow: 0 0 8px #ff8c4280; }
+    .nav-item.active::after {
+      content: '';
+      display: block;
+      width: 4px;
+      height: 4px;
+      background: #ff9f5c;
+      border-radius: 50%;
+      margin-top: 2px;
+      box-shadow: 0 0 6px #ff9f5c;
+    }
+
+    /* FAB */
+    .fab {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(145deg, #ff8c42, #e0662a);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0f1217;
+      font-size: 28px;
+      box-shadow: 0 6px 14px #000000b0, 0 0 0 2px #ffa766;
+      z-index: 20;
+      cursor: default;
+      transition: transform 0.1s, box-shadow 0.2s;
+      animation: pulse 2s infinite;
+    }
+    .fab:active {
+      transform: scale(0.92);
+      box-shadow: 0 4px 8px #000000, 0 0 0 2px #ff8c42;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="mobile-header">
+      <div class="menu-icon"><i class="fas fa-bars"></i></div>
+      <div class="logo-mobile">
+        <i class="fas fa-dumbbell"></i>
+        <span>THRESHOLD</span>
+      </div>
+      <div class="profile-icon-mobile">ER</div>
+    </header>
+
+    <div class="main-content">
+      <div class="welcome-block">
+        <h2>Workouts, <span class="highlight">Erazor</span> 💪</h2>
+        <p>Planifie, exécute, domine.</p>
+      </div>
+
+      <div class="search-mobile">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Exercice, séance...">
+      </div>
+
+      <!-- Calendrier de la semaine -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-calendar-alt"></i> Planning</h3>
+          <i class="fas fa-chevron-right"></i>
+        </div>
+        <div class="week-calendar">
+          <div class="day"><span class="day-name">L</span><span class="day-number">10</span></div>
+          <div class="day"><span class="day-name">M</span><span class="day-number">11</span></div>
+          <div class="day active"><span class="day-name">M</span><span class="day-number">12</span></div>
+          <div class="day"><span class="day-name">J</span><span class="day-number">13</span></div>
+          <div class="day"><span class="day-name">V</span><span class="day-number">14</span></div>
+          <div class="day"><span class="day-name">S</span><span class="day-number">15</span></div>
+          <div class="day"><span class="day-name">D</span><span class="day-number">16</span></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 8px;">
+          <span class="badge"><i class="fas fa-dumbbell"></i> Pecs/Triceps</span>
+          <span class="text-small">10:00 · 1h</span>
+        </div>
+      </div>
+
+      <!-- Séance du jour (active) avec chrono et compteur -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-bolt"></i> Séance en cours</h3>
+          <i class="fas fa-ellipsis-h"></i>
+        </div>
+        <div class="exercise-item">
+          <span class="exercise-name"><span class="dot" style="background:#ff8c42;"></span> Développé couché</span>
+          <span class="exercise-stats">5x85 kg <span class="exercise-done"><i class="fas fa-check-circle"></i></span></span>
+        </div>
+        <div class="exercise-item">
+          <span class="exercise-name"><span class="dot" style="background:#ff8c42;"></span> Dips lestés</span>
+          <span class="exercise-stats">4x+30 kg</span>
+        </div>
+        <div class="exercise-item">
+          <span class="exercise-name"><span class="dot" style="background:#ff8c42;"></span> Tirage poulie</span>
+          <span class="exercise-stats">4x70 kg</span>
+        </div>
+        <div class="exercise-item">
+          <span class="exercise-name"><span class="dot" style="background:#ff8c42;"></span> Élévations lat.</span>
+          <span class="exercise-stats">3x14 kg</span>
+        </div>
+
+        <!-- Chronomètre -->
+        <div class="chrono-container" style="margin-top:16px;">
+          <span class="chrono-display" id="chrono">01:30</span>
+          <div class="chrono-controls">
+            <button class="chrono-btn" id="chronoStartPause"><i class="fas fa-play"></i></button>
+            <button class="chrono-btn" id="chronoReset"><i class="fas fa-undo-alt"></i></button>
+          </div>
+        </div>
+
+        <!-- Compteur de séries -->
+        <div class="set-counter" style="margin-top:12px;">
+          <span class="counter-display" id="setCount">3</span><span style="color:#ffbc8c;">/5 séries</span>
+          <div class="counter-controls">
+            <button class="counter-btn" id="decrementSet"><i class="fas fa-minus"></i></button>
+            <button class="counter-btn" id="incrementSet"><i class="fas fa-plus"></i></button>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 12px; margin-top: 16px;">
+          <button class="btn btn-primary"><i class="fas fa-play"></i> Continuer</button>
+          <button class="btn"><i class="fas fa-chart-simple"></i> Analyse</button>
+        </div>
+      </div>
+
+      <!-- Statistiques de volume -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-chart-bar"></i> Volume hebdo</h3>
+          <i class="fas fa-info-circle"></i>
+        </div>
+        <div class="volume-stats">
+          <div class="volume-item">
+            <div class="volume-value">12.5 t</div>
+            <div class="volume-label">Total</div>
+          </div>
+          <div class="volume-item">
+            <div class="volume-value">+8%</div>
+            <div class="volume-label">Progression</div>
+          </div>
+          <div class="volume-item">
+            <div class="volume-value">4</div>
+            <div class="volume-label">Séances</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CATALOGUE D'EXERCICES -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-database"></i> Catalogue exercices</h3>
+          <i class="fas fa-search"></i>
+        </div>
+        <div class="catalogue-grid">
+          <div class="catalogue-item"><i class="fas fa-chevron-circle-up"></i><span>Développé</span><span class="small">Pecs</span></div>
+          <div class="catalogue-item"><i class="fas fa-arrow-down"></i><span>Squat</span><span class="small">Jambes</span></div>
+          <div class="catalogue-item"><i class="fas fa-arrow-up"></i><span>Tractions</span><span class="small">Dos</span></div>
+          <div class="catalogue-item"><i class="fas fa-hand-paper"></i><span>Épaules</span><span class="small">Développé</span></div>
+          <div class="catalogue-item"><i class="fas fa-arrow-left"></i><span>Rowing</span><span class="small">Dos</span></div>
+          <div class="catalogue-item"><i class="fas fa-arrow-right"></i><span>Dips</span><span class="small">Triceps</span></div>
+          <div class="catalogue-item"><i class="fas fa-bicycle"></i><span>Leg curl</span><span class="small">Ischios</span></div>
+          <div class="catalogue-item"><i class="fas fa-hand-rock"></i><span>Curl</span><span class="small">Biceps</span></div>
+        </div>
+        <div style="margin-top:12px; text-align:center;">
+          <span class="badge">+ 42 exercices</span>
+        </div>
+      </div>
+
+      <!-- TECHNIQUES ET CONSEILS -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-video"></i> Techniques pro</h3>
+          <i class="fas fa-plus-circle"></i>
+        </div>
+        <div class="technique-card">
+          <div class="technique-title">Développé couché · grip</div>
+          <div class="technique-desc">Maintiens les coudes à 45° pour protéger l'épaule.</div>
+          <div class="technique-video"><i class="fas fa-play-circle"></i> Voir la vidéo</div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-title">Squat · profondeur</div>
+          <div class="technique-desc">Descends jusqu'à ce que les cuisses soient parallèles au sol.</div>
+          <div class="technique-video"><i class="fas fa-play-circle"></i> Voir la vidéo</div>
+        </div>
+        <div class="technique-card">
+          <div class="technique-title">Tractions · strictes</div>
+          <div class="technique-desc">Évite de balancer, garde les épaules basses.</div>
+          <div class="technique-video"><i class="fas fa-play-circle"></i> Voir la vidéo</div>
+        </div>
+      </div>
+
+      <!-- HISTORIQUE DÉTAILLÉ -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-history"></i> Historique</h3>
+          <i class="fas fa-filter"></i>
+        </div>
+        <div class="history-item">
+          <div class="history-header">
+            <span class="history-date">Hier · 18:30</span>
+            <span class="history-score">8.5/10</span>
+          </div>
+          <div class="history-exos">Développé couché, Dips, Tirage, Élévations</div>
+          <div class="history-volume">Volume: 4.2 t <span class="highlight">+200 kg</span></div>
+        </div>
+        <div class="history-item">
+          <div class="history-header">
+            <span class="history-date">11/03 · 10:00</span>
+            <span class="history-score">9/10</span>
+          </div>
+          <div class="history-exos">Squat, Presse, Leg curl, Mollets</div>
+          <div class="history-volume">Volume: 8.1 t <span class="highlight">+350 kg</span></div>
+        </div>
+        <div class="history-item">
+          <div class="history-header">
+            <span class="history-date">09/03 · 17:00</span>
+            <span class="history-score">7/10</span>
+          </div>
+          <div class="history-exos">Tractions, Rowing, Tirage, Curl</div>
+          <div class="history-volume">Volume: 3.8 t <span class="highlight">-50 kg</span></div>
+        </div>
+        <div style="margin-top:8px; text-align:center;">
+          <span class="badge">Voir les 12 séances</span>
+        </div>
+      </div>
+
+      <!-- PROGRESSION PAR EXERCICE -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-chart-line"></i> Évolution du développé</h3>
+          <i class="fas fa-calendar-alt"></i>
+        </div>
+        <div class="progress-graph">
+          <div class="graph-bar" style="--h:60%"></div>
+          <div class="graph-bar" style="--h:72%"></div>
+          <div class="graph-bar" style="--h:80%"></div>
+          <div class="graph-bar" style="--h:85%"></div>
+          <div class="graph-bar" style="--h:95%"></div>
+          <div class="graph-bar" style="--h:100%"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:10px;">
+          <span>sem 1</span><span>sem 2</span><span>sem 3</span><span>sem 4</span><span>sem 5</span><span>sem 6</span>
+        </div>
+        <div style="margin-top:12px; display:flex; gap:16px;">
+          <span><span class="stat-label">1RM actuel</span> <strong class="highlight">122 kg</strong></span>
+          <span><span class="stat-label">Record</span> <strong class="highlight">125 kg</strong></span>
+        </div>
+      </div>
+
+      <!-- SUGGESTIONS PROGRAMMES INTELLIGENTS -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-robot"></i> Coach IA</h3>
+          <i class="fas fa-microchip"></i>
+        </div>
+        <div style="background: #0f131a; border-radius: 20px; padding: 16px;">
+          <p class="text-small">Basé sur ta récup et tes perfs :</p>
+          <div style="display:flex; justify-content:space-between; margin-top:12px;">
+            <span>Jambes</span>
+            <span class="highlight">+5 kg sur squat</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-top:8px;">
+            <span>Pectoraux</span>
+            <span class="highlight">Maintien</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-top:8px;">
+            <span>Dos</span>
+            <span class="highlight">+2.5 kg rowing</span>
+          </div>
+          <hr>
+          <div class="badge" style="margin-top:8px;"><i class="fas fa-download"></i> Programme push/pull suggéré</div>
+        </div>
+      </div>
+
+      <!-- BADGES ET RÉCOMPENSES -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-medal"></i> Succès</h3>
+          <i class="fas fa-trophy"></i>
+        </div>
+        <div class="badge-row">
+          <div class="badge-card"><i class="fas fa-fire" style="color:#ff8c42;"></i> 10 séances</div>
+          <div class="badge-card"><i class="fas fa-dragon" style="color:#ff8c42;"></i> PR squat</div>
+          <div class="badge-card"><i class="fas fa-skull" style="color:#ff8c42;"></i> 5h de guerre</div>
+          <div class="badge-card"><i class="fas fa-hand-fist" style="color:#ff8c42;"></i> Guerrier</div>
+        </div>
+      </div>
+
+      <div style="height: 20px;"></div>
+    </div>
+
+    <!-- FAB -->
+    <div class="fab" role="button" aria-label="Ajouter une séance"><i class="fas fa-plus"></i></div>
+
+    <!-- Bottom navigation (onglet Workouts actif) -->
+    <nav class="bottom-nav">
+      <div class="nav-item"><i class="fas fa-chart-pie"></i><span>Dashboard</span></div>
+      <div class="nav-item active"><i class="fas fa-calendar-alt"></i><span>Workouts</span></div>
+      <div class="nav-item"><i class="fas fa-utensils"></i><span>Nutrition</span></div>
+      <div class="nav-item"><i class="fas fa-chart-line"></i><span>Progrès</span></div>
+      <div class="nav-item"><i class="fas fa-exclamation-triangle"></i><span>Cycle</span></div>
+      <div class="nav-item"><i class="fas fa-cog"></i><span>Settings</span></div>
+    </nav>
+  </div>
+
+  <div style="text-align: center; color: #3f4a57; font-size: 11px; padding: 8px; background: #0a0c0e;">threshold · workouts complet</div>
+
+  <script>
+    (function() {
+      // Chronomètre
+      let chronoInterval;
+      let chronoSeconds = 90;
+      let chronoRunning = false;
+      const chronoDisplay = document.getElementById('chrono');
+      const startPauseBtn = document.getElementById('chronoStartPause');
+      const resetBtn = document.getElementById('chronoReset');
+
+      function formatChrono(sec) {
+        const mins = Math.floor(sec / 60);
+        const remainingSec = sec % 60;
+        return `${mins.toString().padStart(2, '0')}:${remainingSec.toString().padStart(2, '0')}`;
+      }
+      function updateChronoDisplay() { chronoDisplay.textContent = formatChrono(chronoSeconds); }
+      function startChrono() {
+        if (chronoRunning) return;
+        chronoRunning = true;
+        startPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        chronoInterval = setInterval(() => {
+          if (chronoSeconds > 0) { chronoSeconds--; updateChronoDisplay(); }
+          else { clearInterval(chronoInterval); chronoRunning = false; startPauseBtn.innerHTML = '<i class="fas fa-play"></i>'; }
+        }, 1000);
+      }
+      function pauseChrono() { clearInterval(chronoInterval); chronoRunning = false; startPauseBtn.innerHTML = '<i class="fas fa-play"></i>'; }
+      function resetChrono() { pauseChrono(); chronoSeconds = 90; updateChronoDisplay(); }
+      startPauseBtn.addEventListener('click', (e) => { e.preventDefault(); chronoRunning ? pauseChrono() : startChrono(); });
+      resetBtn.addEventListener('click', (e) => { e.preventDefault(); resetChrono(); });
+
+      // Compteur de séries
+      let setCount = 3;
+      const setDisplay = document.getElementById('setCount');
+      const decrementBtn = document.getElementById('decrementSet');
+      const incrementBtn = document.getElementById('incrementSet');
+      function updateSetDisplay() { setDisplay.textContent = setCount; }
+      decrementBtn.addEventListener('click', (e) => { e.preventDefault(); if (setCount > 0) { setCount--; updateSetDisplay(); } });
+      incrementBtn.addEventListener('click', (e) => { e.preventDefault(); if (setCount < 10) { setCount++; updateSetDisplay(); } });
+    })();
+  </script>
+
+  <!-- Navigation système -->
+  <script src="js/navigation.js"></script>
+</body>
+</html>

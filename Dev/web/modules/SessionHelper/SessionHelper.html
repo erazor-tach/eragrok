@@ -1,0 +1,50 @@
+<!-- ============================================
+     MODULE SessionHelper - Structure HTML
+     Aide pour la séance (chrono + compteur)
+     ============================================ -->
+
+<div class="session-card" id="sessionHelper">
+  <!-- Header avec ring progress -->
+  <div class="session-row">
+    <div class="ring" id="sessionRing">
+      <span id="sessionPercent">0%</span>
+    </div>
+    <div class="session-details">
+      <p>Séance en cours</p>
+      <strong id="sessionName">Push A · Pecs/Épaules</strong>
+    </div>
+  </div>
+
+  <!-- Chronomètre -->
+  <div class="chrono-container">
+    <div class="chrono-display" id="chronoDisplay">00:00</div>
+    <div class="chrono-controls">
+      <button class="chrono-btn" id="chronoPlay" title="Play">
+        <i class="fas fa-play"></i>
+      </button>
+      <button class="chrono-btn" id="chronoPause" title="Pause" style="display:none;">
+        <i class="fas fa-pause"></i>
+      </button>
+      <button class="chrono-btn" id="chronoReset" title="Reset">
+        <i class="fas fa-rotate-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Compteur de séries -->
+  <div class="set-counter">
+    <div class="counter-display">
+      <span id="setCount">0</span> / <span id="setTotal">12</span> séries
+    </div>
+    <div class="counter-controls">
+      <button class="counter-btn" id="setMinus" title="Séries -">−</button>
+      <button class="counter-btn" id="setPlus" title="Séries +">+</button>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="session-actions">
+    <button class="session-btn session-btn-primary" id="sessionContinue">Continuer</button>
+    <button class="session-btn" id="sessionDetails">Détails</button>
+  </div>
+</div>

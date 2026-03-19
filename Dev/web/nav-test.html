@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THRESHOLD - Test Navigation</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0c0e;
+      color: #e8eef2;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .app {
+      max-width: 480px;
+      width: 100%;
+      margin: 0 auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 80px;
+    }
+    .header {
+      background: #13171c;
+      padding: 20px;
+      border-bottom: 1px solid #2c323a;
+      text-align: center;
+    }
+    .header h1 {
+      color: #ff8c42;
+      font-size: 24px;
+    }
+    .header p {
+      color: #8e9fb1;
+      font-size: 14px;
+    }
+    .content {
+      flex: 1;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .status {
+      background: #1a1e26;
+      border-radius: 20px;
+      padding: 30px;
+      margin: 20px 0;
+      border: 1px solid #2e353f;
+    }
+    .status h2 {
+      color: #ff8c42;
+      margin-bottom: 20px;
+    }
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .status-item {
+      background: #0f131a;
+      padding: 16px;
+      border-radius: 12px;
+    }
+    .status-item.active {
+      background: linear-gradient(135deg, #ff8c4220, #e0662a20);
+      border: 1px solid #ff8c42;
+    }
+    .status-label {
+      font-size: 12px;
+      color: #8e9fb1;
+      margin-bottom: 4px;
+    }
+    .status-value {
+      font-weight: 700;
+      color: #ff8c42;
+    }
+    /* Bottom nav */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      right: 0;
+      background: #13171e;
+      border-top: 1px solid #2c343e;
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 4px 12px;
+      border-radius: 28px 28px 0 0;
+      box-shadow: 0 -4px 12px #00000080;
+    }
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      color: #8a9bb0;
+      font-size: 12px;
+      cursor: pointer;
+      padding: 6px 8px;
+      border-radius: 12px;
+      transition: all 0.2s;
+    }
+    .nav-item:hover {
+      background: #1a1f28;
+    }
+    .nav-item i {
+      font-size: 22px;
+    }
+    .nav-item.active {
+      color: #ff9f5c;
+    }
+    .nav-item.active i {
+      color: #ff9f5c;
+      text-shadow: 0 0 8px #ff8c4280;
+    }
+    .nav-item.active::after {
+      content: '';
+      display: block;
+      width: 4px;
+      height: 4px;
+      background: #ff9f5c;
+      border-radius: 50%;
+      margin-top: 2px;
+      box-shadow: 0 0 6px #ff9f5c;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="header">
+      <h1>🔥 THRESHOLD</h1>
+      <p>Test Navigation Système</p>
+    </div>
+
+    <div class="content">
+      <div class="status">
+        <h2>✅ Navigation Prête</h2>
+        <p>Clique sur les onglets en bas pour naviguer entre les pages</p>
+        
+        <div class="status-grid">
+          <div class="status-item active" id="page-dashboard">
+            <div class="status-label">Dashboard</div>
+            <div class="status-value">●</div>
+          </div>
+          <div class="status-item" id="page-workout">
+            <div class="status-label">Workout</div>
+            <div class="status-value">○</div>
+          </div>
+          <div class="status-item" id="page-nutrition">
+            <div class="status-label">Nutrition</div>
+            <div class="status-value">○</div>
+          </div>
+          <div class="status-item" id="page-progres">
+            <div class="status-label">Progrès</div>
+            <div class="status-value">○</div>
+          </div>
+          <div class="status-item" id="page-cycle">
+            <div class="status-label">Cycle</div>
+            <div class="status-value">○</div>
+          </div>
+          <div class="status-item" id="page-settings">
+            <div class="status-label">Settings</div>
+            <div class="status-value">○</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom nav -->
+    <nav class="bottom-nav">
+      <div class="nav-item active">
+        <i class="fas fa-chart-pie"></i>
+        <span>Dashboard</span>
+      </div>
+      <div class="nav-item">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Workouts</span>
+      </div>
+      <div class="nav-item">
+        <i class="fas fa-utensils"></i>
+        <span>Nutrition</span>
+      </div>
+      <div class="nav-item">
+        <i class="fas fa-chart-line"></i>
+        <span>Progrès</span>
+      </div>
+      <div class="nav-item">
+        <i class="fas fa-exclamation-triangle"></i>
+        <span>Cycle</span>
+      </div>
+      <div class="nav-item">
+        <i class="fas fa-cog"></i>
+        <span>Settings</span>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Navigation système -->
+  <script src="js/navigation.js"></script>
+  
+  <script>
+    // Test visuel des clics
+    document.querySelectorAll('.nav-item').forEach((item, idx) => {
+      item.addEventListener('click', () => {
+        const pages = ['dashboard', 'workout', 'nutrition', 'progres', 'cycle', 'settings'];
+        document.querySelectorAll('.status-item').forEach(el => {
+          el.classList.remove('active');
+          el.querySelector('.status-value').textContent = '○';
+        });
+        const target = document.getElementById(`page-${pages[idx]}`);
+        target.classList.add('active');
+        target.querySelector('.status-value').textContent = '●';
+      });
+    });
+  </script>
+</body>
+</html>
